@@ -21,7 +21,14 @@ public class LinkedList<T> {
 		tail = tail == null ? root : tail.withNext(entry).next;
 		return this;
 	}
+	
+	public LinkedList<T> removeHead() {
+		
+		root = root != null ? root.next : null;
+		return this;
+	}
 
+	@SuppressWarnings("unchecked")
 	public LinkedList<T> withDataSet(T... elements) {
 		for (T element : elements) {
 			addEntryToTail(element);
@@ -29,6 +36,7 @@ public class LinkedList<T> {
 		return this;
 	}
 
+	
 	public String toString() {
 		StringBuilder elements = new StringBuilder();
 
@@ -60,7 +68,12 @@ public class LinkedList<T> {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(new LinkedList<Integer>().withDataSet(1, 2, 3, 4, 5).toString());
+		
+		LinkedList<Integer> myList = new LinkedList<Integer>().withDataSet(1, 2, 3, 4, 5);		
+		System.out.println(myList.toString());	
+		
+		myList.removeHead();	
+		System.out.println(myList.toString());
 	}
 
 }
