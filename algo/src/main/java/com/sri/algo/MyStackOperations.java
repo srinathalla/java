@@ -55,6 +55,9 @@ public class MyStackOperations<T extends Comparable<T>> {
 		
 		stack.pop();
 		System.out.println(stack.toString());
+		
+		stack.pop();
+		System.out.println(stack.toString());
 
 	}
 
