@@ -4,7 +4,12 @@ public class LinkedList<T> {
 
 	private Node root;
 	private Node tail;
-	
+	private int count = 0;
+
+	public int length() {
+		return count;
+	}
+
 	public Node getRoot() {
 		return root;
 	}
@@ -12,6 +17,7 @@ public class LinkedList<T> {
 	public LinkedList<T> addEntry(T data) {
 		Node entry = new Node().withData(data);
 		root = root == null ? entry : entry.withNext(root);
+		increment();
 		return this;
 	}
 
@@ -19,12 +25,23 @@ public class LinkedList<T> {
 		Node entry = new Node().withData(data);
 		root = root == null ? entry : root;
 		tail = tail == null ? root : tail.withNext(entry).next;
+		increment();
 		return this;
 	}
-	
+
+	private void increment() {
+		count++;
+	}
+
+	private void decrement() {
+		count--;
+	}
+
 	public LinkedList<T> removeHead() {
-		
+
 		root = root != null ? root.next : null;
+
+		decrement();
 		return this;
 	}
 
@@ -36,18 +53,19 @@ public class LinkedList<T> {
 		return this;
 	}
 
-	
 	public String toString() {
 		StringBuilder elements = new StringBuilder();
 
-		Node entry = root;
-		while (entry != null) {
-			elements.append(entry.data);
-			elements.append("-->");
-			entry = entry.next;
+		if (root != null) {
+			Node entry = root;
+			while (entry != null) {
+				elements.append(entry.data);
+				elements.append("-->");
+				entry = entry.next;
+			}
+
+			elements.replace(elements.lastIndexOf("-->"), elements.length(), "");
 		}
-		
-		elements.replace(elements.lastIndexOf("-->"), elements.length(), "");
 
 		return elements.toString();
 	}
@@ -68,11 +86,11 @@ public class LinkedList<T> {
 	}
 
 	public static void main(String[] args) {
-		
-		LinkedList<Integer> myList = new LinkedList<Integer>().withDataSet(1, 2, 3, 4, 5);		
-		System.out.println(myList.toString());	
-		
-		myList.removeHead();	
+
+		LinkedList<Integer> myList = new LinkedList<Integer>().withDataSet(1, 2, 3, 4, 5);
+		System.out.println(myList.toString());
+
+		myList.removeHead();
 		System.out.println(myList.toString());
 	}
 

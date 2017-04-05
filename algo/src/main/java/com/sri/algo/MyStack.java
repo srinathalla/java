@@ -9,13 +9,23 @@ public class MyStack<T> {
 	}
 
 	public T pop() {
-		T data = delegatedLinkedList.getRoot().data;
+		T data = delegatedLinkedList.getRoot() != null ? delegatedLinkedList.getRoot().data : null;
 		delegatedLinkedList.removeHead();
 		return data;
 	}
 
 	public T peek() {
 		return delegatedLinkedList.getRoot() != null ? delegatedLinkedList.getRoot().data : null;
+	}
+	
+	public int size()
+	{
+		return delegatedLinkedList.length();
+	}
+	
+	public boolean isEmpty()
+	{
+		return size() == 0;
 	}
 
 	@SuppressWarnings("unchecked")
