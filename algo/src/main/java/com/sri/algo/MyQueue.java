@@ -2,7 +2,6 @@ package com.sri.algo;
 
 //Queue implementation using linked list.
 public class MyQueue<T> {
-
 	private LinkedList<T> delegatedLinkedList = new LinkedList<>();
 
 	public void add(T data) {
