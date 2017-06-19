@@ -1,5 +1,7 @@
 package com.sri.algo;
 
+import java.util.Scanner;
+
 public class QueueUsingTwoStacks<T> {
 
 	private MyStack<T> newStack = new MyStack<>();
@@ -61,6 +63,20 @@ public class QueueUsingTwoStacks<T> {
 		System.out.println(queue);
 		System.out.println("Element Removed : " + queue.remove());
 		System.out.println("Start Element in Queue : " + queue.peek());
+		
+		try(Scanner in = new Scanner(System.in))
+		{
+			
+			int n = in.nextInt();
+			
+			for(int i=0 ; i < n;i ++)
+			{
+				String input = in.nextLine();
+				int op = Integer.valueOf(input.split(" ")[0]);
+			}
+		}
+		
+		
 		
 		
 	}

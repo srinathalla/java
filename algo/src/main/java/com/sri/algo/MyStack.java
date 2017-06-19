@@ -1,5 +1,7 @@
 package com.sri.algo;
 
+import com.sri.algo.linklist.LinkedList;
+
 //Stack Implementation using linked list.
 public class MyStack<T> {
 	private LinkedList<T> delegatedLinkedList = new LinkedList<>();
@@ -9,13 +11,13 @@ public class MyStack<T> {
 	}
 
 	public T pop() {
-		T data = delegatedLinkedList.getRoot() != null ? delegatedLinkedList.getRoot().data : null;
+		T data = delegatedLinkedList.getRoot() != null ? delegatedLinkedList.getRoot().getData() : null;
 		delegatedLinkedList.removeHead();
 		return data;
 	}
 
 	public T peek() {
-		return delegatedLinkedList.getRoot() != null ? delegatedLinkedList.getRoot().data : null;
+		return delegatedLinkedList.getRoot() != null ? delegatedLinkedList.getRoot().getData() : null;
 	}
 	
 	public int size()
