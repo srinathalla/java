@@ -3,7 +3,7 @@ package com.sri.algo.dp;
 public class LongestCommonSubSequence {
 
 	/* Returns length of LCS for X[0..m-1], Y[0..n-1] */
-	int lcs(char[] X, char[] Y, int m, int n) 
+	public static int lcs(char[] X, char[] Y, int m, int n) 
 	{
 		
 		if (m ==0 || n ==0)
@@ -32,7 +32,7 @@ public class LongestCommonSubSequence {
 	 * @param n
 	 * @return
 	 */
-	int lcsWithDP(char[] X, char[] Y, int m, int n) 
+	public static int lcsWithDP(char[] X, char[] Y, int m, int n) 
 	{
 		int[][] lcsMatrix = new int[m+1][n+1];
 	
@@ -72,7 +72,7 @@ public class LongestCommonSubSequence {
 	}
 	
 	
-	private void printLCS(int[][] lcsMatrix ,char[] X, char[] Y)
+	private static void printLCS(int[][] lcsMatrix ,char[] X, char[] Y)
 	{
 		int i = lcsMatrix.length - 1;
 		int j = lcsMatrix[0].length -1;
@@ -102,7 +102,7 @@ public class LongestCommonSubSequence {
 	}
 
 	public static void main(String[] args) {
-		LongestCommonSubSequence lcs = new LongestCommonSubSequence();
+		
 		String s1 = "AGGTAB";
 		String s2 = "GXTXAYB";
 
@@ -111,6 +111,6 @@ public class LongestCommonSubSequence {
 		int m = X.length;
 		int n = Y.length;
 
-		System.out.println("Length of LCS is" + " " + lcs.lcsWithDP(X, Y, m, n));
+		System.out.println("Length of LCS is" + " " + lcsWithDP(X, Y, m, n));
 	}
 }
