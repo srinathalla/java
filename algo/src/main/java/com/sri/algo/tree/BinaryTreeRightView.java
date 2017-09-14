@@ -3,33 +3,33 @@ package com.sri.algo.tree;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BinaryTreeLeftView {
-
-	/**
-	 *  Left view is the first node present in each level.
-	 *  
-	 *              10
+/**
+ *  Right view is the last node present in each level.
+ *       
+ *                  10
  *             20        40
  *        30         60
  *               70
  *               
  *            Left View is 10,20,30 ,70
-	 *  
-	 * @param root
-	 * @return
-	 */
-	public static List<Node> leftView(Node root) {
+ *  
+ *  @author KH2024
+ *
+ */
+public class BinaryTreeRightView {
+	
+	public static List<Node> rightView(Node root) {
 		List<Node> nodes = new ArrayList<>();
 
 		Level maxLevel = new Level();
 		maxLevel.value = -1;
 
-		populateLeftViewNodes(root, 0, maxLevel, nodes);
+		populateRightViewNodes(root, 0, maxLevel, nodes);
 
 		return nodes;
 	}
 
-	public static void populateLeftViewNodes(Node node, int level, Level maxLevel, List<Node> nodes) 
+	public static void populateRightViewNodes(Node node, int level, Level maxLevel, List<Node> nodes) 
 	{	
 		if (node != null) {
 			
@@ -38,8 +38,9 @@ public class BinaryTreeLeftView {
 				maxLevel.value = level;
 			}
 
-			populateLeftViewNodes(node.left, level + 1, maxLevel, nodes);
-			populateLeftViewNodes(node.right, level + 1, maxLevel, nodes);
+			populateRightViewNodes(node.right, level + 1, maxLevel, nodes);
+			populateRightViewNodes(node.left, level + 1, maxLevel, nodes);
+			
 		}
 	}
 
@@ -49,13 +50,17 @@ public class BinaryTreeLeftView {
 		binaryTree.insertLeft(10, 20);
 		binaryTree.insertRight(10, 30);
 
-		// binaryTree.insertLeft(20, 40);
+		binaryTree.insertLeft(20, 40);
 		binaryTree.insertRight(20, 60);
 
 		binaryTree.insertLeft(30, 70);
 		binaryTree.insertRight(70, 80);
+		
+		binaryTree.insertLeft(40, 90);
+		binaryTree.insertLeft(90, 100);
 
-		System.out.println(leftView(binaryTree.getRoot()));
+		System.out.println(rightView(binaryTree.getRoot()));
 	}
+
 
 }

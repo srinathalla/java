@@ -8,15 +8,15 @@ public class ReverseLinkedList extends LinkedList<Integer>
 		
 		Node<Integer> head = ll.getRoot();
 		Node<Integer> prev = null;
-		Node<Integer> curr = head,next = head;
+		Node<Integer> curr = head,next = curr.next;
 		
-		while (curr != null)
+		while (next != null)
 		{
-			next = curr.next;	
 			curr.next = prev;
-		
+			
 			prev = curr;
-			curr = next;			
+			curr = next;	
+			next = next.next;
 		}
 		
 		ll.setRoot(prev);
