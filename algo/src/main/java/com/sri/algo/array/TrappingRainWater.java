@@ -1,7 +1,14 @@
-package com.sri.algo.array.rotate;
+package com.sri.algo.array;
 
 public class TrappingRainWater {
 	
+	/**
+	 * Time Complexity O(n).
+	 * Loop through given array 3 times.
+	 * 
+	 * @param elevation
+	 * @return
+	 */
 	public static int maxWater(int[] elevation) 
 	{
 		// Each entry stores maximum elevation to the left till current index.
