@@ -49,7 +49,7 @@ public class BinaryTreeLeftView {
 		binaryTree.insertLeft(10, 20);
 		binaryTree.insertRight(10, 30);
 
-		// binaryTree.insertLeft(20, 40);
+		 binaryTree.insertLeft(20, 40);
 		binaryTree.insertRight(20, 60);
 
 		binaryTree.insertLeft(30, 70);

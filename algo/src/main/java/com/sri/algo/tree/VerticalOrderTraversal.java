@@ -9,19 +9,8 @@ import java.util.Queue;
 import java.util.TreeMap;
 
 
-public class VerticalOrderTraversal {
-	
-	static class NodeContainer
-	{
-		
-		public NodeContainer(Node node, int hd) {
-			super();
-			this.node = node;
-			this.hd = hd;
-		}
-		public Node node;
-		public int hd;
-	}
+public class VerticalOrderTraversal 
+{
 	
 	public static void verticalOrderWithLevelOrder(Node root)
 	{

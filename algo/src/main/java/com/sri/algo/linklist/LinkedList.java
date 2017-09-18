@@ -75,11 +75,14 @@ public class LinkedList<T> {
 			Node<T> entry = root;
 			while (entry != null) {
 				elements.append(entry.data);
-				elements.append("-->");
 				entry = entry.next;
+				
+				if (entry != null)
+				{
+					elements.append("-->");
+				}
 			}
 
-			elements.replace(elements.lastIndexOf("-->"), elements.length(), "");
 		}
 
 		return elements.toString();

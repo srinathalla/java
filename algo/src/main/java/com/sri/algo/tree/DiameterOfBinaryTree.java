@@ -5,7 +5,7 @@ public class DiameterOfBinaryTree {
 		int h = 0;
 	}
 
-	public int getDiameter(Node node, Hieght hieght) 
+	public static int getDiameter(Node node, Hieght hieght) 
 	{
 		
 		Hieght lh = new Hieght();
@@ -16,7 +16,6 @@ public class DiameterOfBinaryTree {
 			return 0;
 		}
 
-		lh.h++; rh.h++;
 		int ld = getDiameter(node.left, lh);
 		int rd = getDiameter(node.right, rh);
 		
@@ -25,15 +24,28 @@ public class DiameterOfBinaryTree {
 		return Math.max(lh.h + rh.h + 1, Math.max(ld, rd));
 
 	}
-
-	public int getHeight(Node node) {
-
-		if (node == null) {
+	
+	public static int getDiameterUsingMaxRootToLeafAppraoch(Node node, Counter c) 
+	{
+		
+		if (node == null) {	
 			return 0;
 		}
 
-		return 1 + Math.max(getHeight(node.left), getHeight(node.right));
+		int ld = getDiameterUsingMaxRootToLeafAppraoch(node.left, c);
+		int rd = getDiameterUsingMaxRootToLeafAppraoch(node.right, c);
+		
+		// Update c at each node that has both children.
+		if (node.left != null && node.right != null)
+		{
+			c.val = Integer.max(c.val, ld + rd + 1);
+		}
+
+		// Returns max root to leaf path sum originating at current node.
+		// Each node value is assumed as 1.
+		return Math.max(ld,rd) + 1;
 	}
+
 
 	public static void main(String[] args) {
 
@@ -44,6 +56,13 @@ public class DiameterOfBinaryTree {
 		binaryTree.insertLeft(20, 40);
 		binaryTree.insertRight(20, 60);
 
-		System.out.println(new DiameterOfBinaryTree().getDiameter(binaryTree.getRoot(),new Hieght()));
+		System.out.println(getDiameter(binaryTree.getRoot(),new Hieght()));
+		
+		Counter c  = new Counter();
+		c.val = Integer.MIN_VALUE;
+		
+		getDiameterUsingMaxRootToLeafAppraoch(binaryTree.getRoot(),c);
+		
+		System.out.println(c.val);;
 	}
 }
