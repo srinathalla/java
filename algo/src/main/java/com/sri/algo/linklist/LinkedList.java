@@ -77,9 +77,10 @@ public class LinkedList<T> {
 				elements.append(entry.data);
 				entry = entry.next;
 				
-				if (entry != null)
+				elements.append("-->");
+				if (entry == null)
 				{
-					elements.append("-->");
+					elements.append("null");
 				}
 			}
 
