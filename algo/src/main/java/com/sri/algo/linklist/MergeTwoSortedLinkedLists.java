@@ -94,19 +94,6 @@ public class MergeTwoSortedLinkedLists {
 		return mergedHead;
 	}
 
-	public static void printList(Node<Integer> root) {
-		
-		System.out.println();
-		while (root != null) {
-			System.out.print(root.data);
-			System.out.print("-->");
-
-			root = root.next;
-			if (root == null) {
-				System.out.print("null");
-			}
-		}
-	}
 
 	public static void main(String[] args) {
 
@@ -124,7 +111,7 @@ public class MergeTwoSortedLinkedLists {
 		
 		Node<Integer> ms2 = mergeUsingIteration(root1, root2);
 
-		printList(ms2);
+		PrintNodes.printList(ms2);
 
 	}
 

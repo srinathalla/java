@@ -3,7 +3,7 @@ package com.sri.algo.linklist;
 public class ReverseLinkedList extends LinkedList<Integer>
 {
 	
-	public void reverse(LinkedList<Integer>  ll)
+	public static void reverse(LinkedList<Integer>  ll)
 	{
 		
 		Node<Integer> head = ll.getRoot();
@@ -26,8 +26,8 @@ public class ReverseLinkedList extends LinkedList<Integer>
 			
 		LinkedList<Integer> ll = new LinkedList<Integer>().withDataSet(1,2,3,4,5,6);
 		
-		ReverseLinkedList rl = new ReverseLinkedList();
-		rl.reverse(ll);
+	
+		reverse(ll);
 		
 		System.out.println(ll.toString());	
 		
