@@ -22,8 +22,7 @@ public class FirstNoRepeatingKTimes {
 		
 		Map<Integer,Integer> freq = new HashMap<>();
 		for (int ele : arr1) 
-		{
-			
+		{		
 			if (!freq.containsKey(Integer.valueOf(ele)))
 			{
 				freq.put(ele,0);
@@ -39,8 +38,7 @@ public class FirstNoRepeatingKTimes {
 				System.out.println(ele);
 				break;
 			}
-		}
-		
+		}	
 	}
 	
 	public static void main(String[] args) {

@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class MaxElementInStack {
 	
-	 private Stack<Long> delegatedStack = new Stack<>();
+	    private Stack<Long> delegatedStack = new Stack<>();
 		private Stack<Long> maxElementStack = new Stack<>();
 
 		public void push(Long entry) {
