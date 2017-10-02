@@ -1,5 +1,7 @@
 package com.sri.algo.dp;
 
+import java.util.Scanner;
+
 public class LongestCommonSubSequence {
 
 	/* Returns length of LCS for X[0..m-1], Y[0..n-1] */
@@ -66,7 +68,7 @@ public class LongestCommonSubSequence {
 			}
 		}
 		
-		printLCS(lcsMatrix,X,Y);
+		 printLCS(lcsMatrix,X,Y);
 		return lcsMatrix[m][n];
 		
 	}
@@ -103,7 +105,7 @@ public class LongestCommonSubSequence {
 
 	public static void main(String[] args) {
 		
-		String s1 = "AGGTAB";
+		/*String s1 = "AGGTAB";
 		String s2 = "GXTXAYB";
 
 		char[] X = s1.toCharArray();
@@ -111,6 +113,29 @@ public class LongestCommonSubSequence {
 		int m = X.length;
 		int n = Y.length;
 
-		System.out.println("Length of LCS is" + " " + lcsWithDP(X, Y, m, n));
+		System.out.println("Length of LCS is" + " " + lcsWithDP(X, Y, m, n));*/
+		
+		try(Scanner in = new Scanner(System.in))
+		{
+	        int testCount = in.nextInt();
+	        
+	        for (int i =0 ;i < testCount ; i++)
+	        {
+	        	int n1 = in.nextInt();
+	        	int n2 = in.nextInt();
+	        	String s1 = in.nextLine();
+	        	while(s1.isEmpty())
+	        	{
+	        		s1 = in.nextLine();
+	        	}
+	        	String s2 = in.nextLine();
+	        	while(s2.isEmpty())
+	        	{
+	        		s2 = in.nextLine();
+	        	}
+	        	
+	    		System.out.println(lcsWithDP(s1.toCharArray(),s2.toCharArray(),n1,n2));
+	        }
+		}
 	}
 }

@@ -26,10 +26,10 @@ public class EggDropping {
 		int min = Integer.MAX_VALUE;	
 		for (int i = 1; i<= k ; i++)
 		{		
-			int res = Integer.max( dropEgg(n-1, i-1) , dropEgg(n, k-i));	
+			int res = 1 + Integer.max( dropEgg(n-1, i-1) , dropEgg(n, k-i));	
 			min = Integer.min(min, res);		
 		}	
-		return min + 1;
+		return min;
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class EggDropping {
 		//System.out.println("Time Taken : " + (end - start)/1000);
 		
 		start = System.currentTimeMillis();
-		System.out.println(dropEggWithDP(2 , 100));	
+		System.out.println(dropEggWithDP(2 , 3));	
 		end = System.currentTimeMillis();
 		 
 		 System.out.println("Time Taken : " + (end - start)/1000);

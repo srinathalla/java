@@ -1,9 +1,11 @@
 package com.sri.algo.dp;
 
+import java.util.Scanner;
+
 public class CountWaysToReachStairs {
 	
 	
-	public int countWays(int n)
+	public static int countWays(int n)
 	{
 		int[] cache = new int[n];
 
@@ -11,7 +13,7 @@ public class CountWaysToReachStairs {
 		return countWays(n-1,cache) + countWays (n-2,cache) + countWays(n-3,cache);	
 	}
 	
-	public int countWays(int n,int[] cache)
+	public static int countWays(int n,int[] cache)
 	{
 		if (n < 0)
 		{
@@ -28,6 +30,21 @@ public class CountWaysToReachStairs {
 		}
 		
 		return cache[n];
+	}
+	
+	public static void main(String[] args) {
+		
+		try(Scanner in = new Scanner(System.in))
+		{
+	        int testCount = in.nextInt();
+	        
+	        for (int i =0 ;i < testCount ; i++)
+	        {
+	        	int n = in.nextInt();
+	        	
+	    		System.out.println(countWays(n));
+	        }
+		}
 	}
 
 }

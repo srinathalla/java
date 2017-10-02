@@ -45,6 +45,22 @@ public class DiameterOfBinaryTree {
 		// Each node value is assumed as 1.
 		return Math.max(ld,rd) + 1;
 	}
+	
+	   public static int d = 0;
+	   /* Complete the function to get diameter of a binary tree */
+	    public static int diameter(Node node)
+	    {
+	         if (node == null)
+	         {
+	             return 0;
+	         }
+	         
+	         int dia = diameter(node.left) + diameter(node.right) + 1;
+	         
+	         d = Integer.max(dia,d);
+	         
+	         return d;
+	    }
 
 
 	public static void main(String[] args) {
@@ -63,6 +79,8 @@ public class DiameterOfBinaryTree {
 		
 		getDiameterUsingMaxRootToLeafAppraoch(binaryTree.getRoot(),c);
 		
-		System.out.println(c.val);;
+		System.out.println(c.val);
+		
+		System.out.println(diameter(binaryTree.getRoot()));
 	}
 }
