@@ -57,6 +57,17 @@ public class KnightWalk {
 	{
 		boolean[][] visited = new boolean[n][m];
 		
+		s1--;
+		s2--;
+		d1--;
+		d2--;
+		
+		if(!isValid(s1, s2,n,m) || !isValid(d1, d2,n,m))
+		{
+		    return -1;
+		}
+		
+		
 		Pair src = new Pair(s1,s2,0);	
 		Pair dest = new Pair(d1,d2,Integer.MAX_VALUE);
 		

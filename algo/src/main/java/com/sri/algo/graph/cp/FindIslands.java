@@ -30,39 +30,29 @@ public class FindIslands {
 
 		return count;
 	}
+	
+	private static boolean isValid(int i,int j,int N,int M)
+	{
+		return i >= 0 && i < N && j >=0 && j < M; 
+	}
 
 	public static void dfs(int i, int j, int N, int M, int[][] matrix, boolean[][] visited) {
 
 		visited[i][j] = true;
-
-		// current row
-		if (j < N - 1 && !visited[i][j + 1] && matrix[i][j + 1] == 1) {
-			dfs(i, j + 1, N, M, matrix, visited);
-		}
-		if (j > 0 && !visited[i][j - 1] && matrix[i][j - 1] == 1) {
-			dfs(i, j - 1, N, M, matrix, visited);
-		}
-
-		// next row.
-		if (i < N - 1 && !visited[i + 1][j] && matrix[i + 1][j] == 1) {
-			dfs(i + 1, j, N, M, matrix, visited);
-		}
-		if (i < N - 1 && j < M - 1 && !visited[i + 1][j + 1] && matrix[i + 1][j + 1] == 1) {
-			dfs(i + 1, j + 1, N, M, matrix, visited);
-		}
-		if (i < N - 1 && j > 0 && !visited[i + 1][j - 1] && matrix[i + 1][j - 1] == 1) {
-			dfs(i + 1, j - 1, N, M, matrix, visited);
-		}
-
-		// prev row.
-		if (i > 0 && !visited[i - 1][j] && matrix[i - 1][j] == 1) {
-			dfs(i - 1, j, N, M, matrix, visited);
-		}
-		if (i > 0 && j > 0 && !visited[i - 1][j - 1] && matrix[i - 1][j - 1] == 1) {
-			dfs(i - 1, j - 1, N, M, matrix, visited);
-		}
-		if (i > 0 && j < M - 1 && !visited[i - 1][j + 1] && matrix[i - 1][j + 1] == 1) {
-			dfs(i - 1, j + 1, N, M, matrix, visited);
+		
+        // all 8 moves possible.
+		int[] row = new int[] {0, 0,-1,-1,-1, 1, 1, 1};
+		int[] col = new int[]{-1, 1, 0, -1, 1, 0,-1, 1};
+		
+		for (int l=0 ;l < 8;l++)
+		{
+			int adjR = i + row[l];
+			int adjC = j + col[l];
+			
+			if (isValid(adjR,adjC,N,M) && !visited[adjR][adjC] && matrix[adjR][adjC] == 1)
+			{
+				dfs(adjR, adjC, N, M, matrix, visited);
+			}
 		}
 
 	}
