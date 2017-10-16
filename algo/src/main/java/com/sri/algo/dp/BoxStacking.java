@@ -1,6 +1,7 @@
 package com.sri.algo.dp;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class BoxStacking {
 	
@@ -99,11 +100,32 @@ public class BoxStacking {
 		return max;
 	}
 	
+
 	public static void main(String[] args) {
 		
 		Box arr[] = { new Box(4, 6, 7), new Box(1, 2, 3), new Box(4, 5, 6), new Box(10, 12, 32) };
 		
 		System.out.println(maxStackHeight(arr));
+
+		try(Scanner in = new Scanner(System.in))
+		{
+	        int testCount = in.nextInt();
+	        
+	        for (int k =0 ;k < testCount ; k++)
+	        {
+	            int n = in.nextInt();
+	            Box[] boxes = new Box[n];
+	        	
+	        	for (int i =0 ;i < n ; i++)
+	            {
+	        		boxes[i] = new Box(in.nextInt(),in.nextInt(),in.nextInt());
+	            }
+	        	
+	    		System.out.println(maxStackHeight(boxes));
+	        }
+		}
+
 	}
+
 
 }

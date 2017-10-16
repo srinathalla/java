@@ -1,12 +1,12 @@
 package com.sri.algo.tree;
 
 public class Node {
-	
-	int data;
-	Node left;
-	Node right;
-	Node next;
-	
+
+	public int data;
+	public Node left;
+	public Node right;
+	public Node next;
+
 	public Node(int data) {
 		this.data = data;
 	}
@@ -32,7 +32,7 @@ public class Node {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.valueOf(data);

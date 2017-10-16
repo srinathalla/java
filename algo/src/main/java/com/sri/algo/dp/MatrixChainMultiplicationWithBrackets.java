@@ -1,25 +1,7 @@
 package com.sri.algo.dp;
 
-/**
- * Given a sequence of matrices, find the most efficient way to multiply these
- * matrices together. The problem is not actually to perform the
- * multiplications, but merely to decide in which order to perform the
- * multiplications.
- * 
- * For example, suppose A is a 10 × 30 matrix, B is a 30 × 5 matrix, and C is a
- * 5 × 60 matrix. Then,
- * 
- * (AB)C = (10×30×5) + (10×5×60) = 1500 + 3000 = 4500 operations A(BC) =
- * (30×5×60) + (10×30×60) = 9000 + 18000 = 27000 operations.
- * 
- * Input: p[] = {40, 20, 30, 10, 30} Output: 26000
- * 
- * multiplications are obtained by putting parenthesis in following way (A(BC))D
- * --> 20*30*10 + 40*20*10 + 40*10*30
- *
- */
-public class MatrixChainMultiplication {
-
+public class MatrixChainMultiplicationWithBrackets {
+	
 	static int matrixChainOrder(int p[], int l, int h) {
 		System.out.println("l :" + l + " h:" + h);
 		if (l == h) {
@@ -83,5 +65,6 @@ public class MatrixChainMultiplication {
 		System.out.println("Minimum number of multiplications is " + matrixChainOrderWithDP(arr, n));
 
 	}
+
 
 }

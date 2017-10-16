@@ -34,13 +34,9 @@ public class LongestCommonSubString {
 					 arr[i][j] = 0;	 
 				 }	
 			}
-		}
+		}	
 		
-		
-		
-		System.out.println(s1.substring(l -lcs, l));
-	
-		 
+		System.out.println(s1.substring(l -lcs, l));	 
 		
 		return lcs;
 	}

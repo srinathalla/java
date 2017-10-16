@@ -42,14 +42,10 @@ public class FirstNoRepeatingKTimes {
 	}
 	
 	public static void main(String[] args) {
-		
 
 		firstRepeatingNoKTimes(new int[] {4, 1, 2, 1, 1, 2},3);
 		
-		firstRepeatingNoKTimes(new int[] {1 , 7, 4, 3, 4, 8, 7},2);
-		
-		
-			
+		firstRepeatingNoKTimes(new int[] {1 , 7, 4, 3, 4, 8, 7},2);		
 		
 	}
 
