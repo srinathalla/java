@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class LCA {
+public class LCAInBST {
 	
 	static class BST
 	{

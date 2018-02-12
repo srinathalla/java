@@ -68,7 +68,7 @@ public class LongestCommonSubSequence {
 			}
 		}
 		
-		 printLCS(lcsMatrix,X,Y);
+		//  printLCS(lcsMatrix,X,Y);
 		return lcsMatrix[m][n];
 		
 	}
