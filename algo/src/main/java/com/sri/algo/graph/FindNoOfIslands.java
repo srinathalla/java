@@ -20,7 +20,56 @@ package com.sri.algo.graph;
 public class FindNoOfIslands 
 {
 	
-	
+	 public int numIslands(char[][] grid) {
+	        
+	        int count =0 ;
+	        
+	        int n = grid.length;
+	        int m = grid[0].length;
+	        boolean[][] visited = new boolean[n][m];
+	       
+	        
+	        for (int i=0;i<n;i++)
+	        {
+	            for (int j=0;j<m;j++)
+	            {
+	            
+	                if(grid[i][j] == '1' && !visited[i][j])
+	                {
+	                    count++;
+	                    dfs(grid, i,j,n,m,visited);
+	                }
+	            }
+	        }
+	        return count;
+	    }
+	    
+	 private static boolean isValid(int i,int j,int N,int M)
+	 {
+			return i >= 0 && i < N && j >=0 && j < M; 
+	 }
+	 
+     private void dfs(char[][] grid,int i,int j,int n,int m, boolean[][] visited) 
+     {
+    	 visited[i][j] = true;
+    	 
+    	 
+    	 int[] adjRows = new int[] { 0,  0,-1, 1};
+    	 int[] adjCols = new int[] { -1, 1, 0, 0};
+    	 
+    	 for (int l=0 ;l  < 4 ;l ++)
+    	 {	 
+    		 int adjR = i + adjRows[l];
+    		 int adjC = j + adjCols[l];
+    		 
+    		if (isValid(adjR,adjC,n,m) && !visited[adjR][adjC] && grid[adjR][adjC] == '1')
+    		{
+    			 dfs(grid, adjR, adjC, n, m, visited);
+    		}
+    	 }
+       
+        
+     }
 	public int countIslands(int[][] array)
 	{
 		int[][] visitedNodes = new int[array.length][array[0].length];

@@ -55,11 +55,67 @@ public class MaxRectangleArea {
 		return max;
 
 	}
+	
+	public int largestRectangleArea(int[] heights) {
+		
+		int max = Integer.MIN_VALUE;
+		
+		
+		int i =0;
+		int n = heights.length;
+		
+		Stack<Integer> stack = new Stack<>();
+		
+		while(i < n)
+		{
+			if (stack.isEmpty() || heights[stack.peek()] < heights[i])
+			{
+				stack.push(heights[i]);
+				i++;
+			}
+			else
+			{
+				int tp = stack.pop();
+				int h =  heights[tp];
+				
+				int area = h * (stack.isEmpty() ? i : i-1-stack.peek());
+				max = Integer.max(max, area);
+			}
+		}
+		
+		while(!stack.isEmpty())
+		{
+			int tp = stack.pop();
+			int h =  heights[tp];
+			
+			int area = h * (stack.isEmpty() ? i : i-1-stack.peek());
+			max = Integer.max(max, area);
+		}
+		
+		return max;
+        
+    }
+	
 
 	// Driver program to test above function
 	public static void main(String[] args) {
-		int hist[] = { 6, 2, 5, 4, 5, 1, 6 };
-		System.out.println("Maximum area is " + getMaxArea(hist, hist.length));
+		int hist1[] = { 6, 2, 5, 4, 5, 1, 6 };
+		System.out.println("Maximum area is " + getMaxArea(hist1, hist1.length));
+		
+		int hist2[] = {2,1,5,6,2,3};
+		System.out.println("Maximum area is " + getMaxArea(hist2, hist2.length));
+		
+		int hist3[] = {2,3,3,3};
+		System.out.println("Maximum area is " + getMaxArea(hist3, hist3.length));
+		
+		int hist11[] = { 6, 2, 5, 4, 5, 1, 6 };
+		System.out.println("Maximum area is " + getMaxArea(hist11, hist11.length));
+		
+		int hist21[] = {2,1,5,6,2,3};
+		System.out.println("Maximum area is " + getMaxArea(hist21, hist21.length));
+		
+		int hist31[] = {2,3,3,3};
+		System.out.println("Maximum area is " + getMaxArea(hist31, hist31.length));
 	}
 
 	// This code is Contributed by Sumit Ghosh

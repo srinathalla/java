@@ -90,9 +90,51 @@ public class CombinationSum {
 		
 	}
 	
+	public List<List<Integer>> combinationSum(int[] candidates, int target) 
+	{	
+		List<List<Integer>> combinations = new ArrayList<>();
+		
+		List<Integer> path = new ArrayList<>();
+		
+		combinationSum(candidates, candidates.length -1, target,path, combinations);
+		
+		return combinations;    
+    }
+	
+	private void combinationSum(int[] candidiates,int i, int target,List<Integer> path, List<List<Integer>> combinations)
+	{
+		
+		if (target == 0)
+		{
+			List<Integer> cloned = new ArrayList<>();
+			cloned.addAll(path);
+			combinations.add(cloned);
+			return;
+		}
+		
+		if (i < 0 || target < 0)
+		{
+			return;
+		}
+		
+		path.add(candidiates[i]);
+		combinationSum(candidiates, i,target - candidiates[i],path,combinations);
+		path.remove(path.size() -1);
+		
+		combinationSum(candidiates, i-1,target,path,combinations);
+		
+		
+		
+		
+	}
+	
 	public static void main(String[] args) {
 		
-		try(Scanner in = new Scanner(System.in))
+		CombinationSum cs = new CombinationSum();
+		List<List<Integer>> res = cs.combinationSum(new int[] {2, 3, 6, 7}, 7);
+		System.out.println(res);
+		
+		/*try(Scanner in = new Scanner(System.in))
 		{
 	        int testCount = in.nextInt();
 	        
@@ -112,7 +154,7 @@ public class CombinationSum {
 	        	System.out.println();
 	    		
 	        }
-		}
+		}*/
 }
 
 
