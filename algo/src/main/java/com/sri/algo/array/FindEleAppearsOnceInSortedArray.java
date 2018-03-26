@@ -1,7 +1,5 @@
 package com.sri.algo.array;
 
-import java.util.Scanner;
-
 public class FindEleAppearsOnceInSortedArray {
 	
 	/**

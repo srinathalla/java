@@ -57,6 +57,36 @@ public class StockBuyAndSell {
 		
 	}
 	
+	/**
+	 * Time Complexity O(n).
+	 * 
+	 * @param prices
+	 * @return
+	 */
+	public  int maxProfit(int [] prices)
+	{
+		if(prices.length <= 1)
+		{
+			return 0;
+		}
+		
+	   int maxProfit2 = 0;
+	   int maxProfit1 = 0;
+	   int lowestBuyPrice2 = Integer.MAX_VALUE;
+	   int lowestBuyPrice1 = Integer.MAX_VALUE;
+	   
+	   for (int p: prices)
+	   {
+		   maxProfit2 = Integer.max(maxProfit2, p - lowestBuyPrice2);
+		   lowestBuyPrice2 = Integer.min(lowestBuyPrice2, p - maxProfit1);
+		   maxProfit1 = Integer.max(maxProfit1, p - lowestBuyPrice1);
+		   lowestBuyPrice1 = Integer.min(lowestBuyPrice1, p);
+	   }
+	   
+	   return maxProfit2;
+	   
+	}
+	
 	public static void main(String[] args) {
 		
 		StockBuyAndSell stock = new StockBuyAndSell();
@@ -66,7 +96,25 @@ public class StockBuyAndSell {
   
  
         // fucntion call
-        stock.buyAndSell(price);
+        // stock.buyAndSell(price);
+        
+        System.out.println(stock.maxProfit(price));
+        
+        // stock prices on consecutive days
+        int price1[] = {100, 180, 260, 310, 40, 535, 695,30,800};   
+        System.out.println(stock.maxProfit(price1));
+        
+        
+        // stock prices on consecutive days
+        int price2[] = {400,300,200,100};  
+        System.out.println(stock.maxProfit(price2));
+        
+        // stock prices on consecutive days
+        int price3[] = {400,300,100,400};  
+        System.out.println(stock.maxProfit(price3));
+        
+        
+        
 	}
 
 }

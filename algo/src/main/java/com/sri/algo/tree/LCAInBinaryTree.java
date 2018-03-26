@@ -51,10 +51,7 @@ public class LCAInBinaryTree
 		return lca;
 	}
 	
-	static class NodeStatus
-	{
-		boolean isPresent = false;
-	}
+	
 	
 	/**
 	 * /**
@@ -63,7 +60,15 @@ public class LCAInBinaryTree
 	 * 
 	 * Space Complexity is O(2).
 	 * 
-	 * TODO : When one of the key's is not present in the tree it should return null.
+	 * The solution assumes both nodes are present in the tree.
+	 * 
+	 * Recursive call to each sub tree gives the possible lca from the sub tree.
+	 * 
+	 * Idea is we search for the target nodes from left,right sub trees based on the match we decide lca.
+	 * 
+	 * If both left and right tree return matching node's ->  lca is the root.
+	 * else lca is returned from either of the sub trees.
+	 * 
 	 * 
 	 * @param root
 	 * @param node1
@@ -71,49 +76,21 @@ public class LCAInBinaryTree
 	 * @return
 	 * 
 	 */
-	public static Node LCAInSinglePass(Node node, int key1, int key2)
-	{
-		
-		if (node == null)
-		{
-			return null;
-		}
-		
-		NodeStatus key1Status = new NodeStatus();
-		NodeStatus key2Status = new NodeStatus();
-		
-		return LCAInSinglePass(node,key1,key2,key1Status,key2Status);
+	public static Node LCAInSinglePass(Node root, Node p, Node q)
+	{ 
+        if (root == null || root == p || root == q)
+        {
+            return root;
+        }
+        
+        Node left = LCAInSinglePass(root.left,p,q);
+        
+        Node right = LCAInSinglePass(root.right,p,q);
+        
+        return left == null ? right : right == null ? left : root;
 	}
 	
-	private static Node LCAInSinglePass(Node node, int key1, int key2, NodeStatus key1Status, NodeStatus key2Status)
-	{
-		if (node == null)
-		{
-			return null;
-		}
-		
-		if (node.data == key1)
-		{
-			key1Status.isPresent = true;
-			return node;
-		}
-		
-		if (node.data == key2)
-		{
-			key2Status.isPresent = true;
-			return node;
-		}
-		
-		Node leftLCA = LCAInSinglePass(node.left, key1, key2, key1Status, key2Status);
-		Node rLCA = LCAInSinglePass(node.right, key1, key2, key1Status, key2Status);
-		
-		if(leftLCA != null &&  rLCA != null)
-		{
-			return node;
-		}
-		
-		 return leftLCA != null ? leftLCA : rLCA;	
-	}
+	
 	
 	/**
 	 * Time Complexity is O(n). 
@@ -157,14 +134,14 @@ public class LCAInBinaryTree
 		 *                    80 */
 		 
 		    BinaryTree binaryTree = new BinaryTree(10);
-			binaryTree.insertLeft(10, 5);
-			binaryTree.insertRight(10, 30);
+			Node node5 = binaryTree.insertLeft(10, 5);
+			Node node30 =  binaryTree.insertRight(10, 30);
 
-			binaryTree.insertLeft(5, 3);
-			binaryTree.insertRight(5, 9);
+			Node node3 =  binaryTree.insertLeft(5, 3);
+			Node node9 =  binaryTree.insertRight(5, 9);
 
-			binaryTree.insertRight(30, 70);
-			binaryTree.insertRight(70, 80);
+			Node node70 = binaryTree.insertRight(30, 70);
+			Node node80 = binaryTree.insertRight(70, 80);
 
 			/*System.out.println(LCA(binaryTree.getRoot(),9,80));
 			System.out.println(LCA(binaryTree.getRoot(),30,80));
@@ -172,10 +149,10 @@ public class LCAInBinaryTree
 			System.out.println(LCA(binaryTree.getRoot(),70,80));*/
 			
 			
-			System.out.println(LCAInSinglePass(binaryTree.getRoot(),9,80));
-			System.out.println(LCAInSinglePass(binaryTree.getRoot(),30,80));
-			System.out.println(LCAInSinglePass(binaryTree.getRoot(),3,9));
-			System.out.println(LCAInSinglePass(binaryTree.getRoot(),70,80));
+			System.out.println(LCAInSinglePass(binaryTree.getRoot(),node9,node80));
+			System.out.println(LCAInSinglePass(binaryTree.getRoot(),node30,node80));
+			System.out.println(LCAInSinglePass(binaryTree.getRoot(),node3,node9));
+			System.out.println(LCAInSinglePass(binaryTree.getRoot(),node70,node80));
 	}
 
 

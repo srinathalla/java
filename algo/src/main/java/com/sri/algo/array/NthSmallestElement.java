@@ -1,7 +1,23 @@
 package com.sri.algo.array;
 
+import java.util.Arrays;
+
 public class NthSmallestElement {
 	
+	
+	/**
+	 * T.C : O(nlogn).
+	 * 
+	 * @param array
+	 * @param k
+	 * @return
+	 */
+	public static int getNThSmallestBySort(int[] array,int k)
+	{		
+		Arrays.sort(array);	
+		
+		return array[k -1];		
+	}
 	
 	public static int getNThSmallest(int[] array,int n)
 	{	
@@ -53,6 +69,8 @@ public class NthSmallestElement {
 	public static void main(String[] args) {		
 		
 		System.out.println(getNThSmallest(new int[] {40,30,20,10,5},5));
+		
+		System.out.println(getNThSmallestBySort(new int[] {40,30,20,10,5},5));
 	}
 
 }

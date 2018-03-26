@@ -61,6 +61,43 @@ public class LongestConsecutiveSubSequence {
 		
 	}
 	
+	public int longestConsecutive(int[] nums) 
+	{
+		if (nums.length == 0) {
+			return 0;
+		}
+
+		Set<Integer> ele = new HashSet<>();
+
+		for (int no : nums) {
+			ele.add(no);
+		}
+
+	
+		int max = Integer.MIN_VALUE;
+		for (int no : ele) {
+
+			// Check for previous element of every consecutive sequence. 
+			// so that we can skip processing already processed elements.
+			if (!ele.contains(no - 1)) {
+		
+				int count = 1;
+
+				// Count all consecutive numbers starting with current no.
+				while (ele.contains(no + 1)) {
+					no = no + 1;
+					count++;
+				}
+
+				max = Integer.max(max, count);
+			}
+
+		}
+
+		return max;
+
+	}
+	
 	public static void main(String[] args) {
 		
 		System.out.println(

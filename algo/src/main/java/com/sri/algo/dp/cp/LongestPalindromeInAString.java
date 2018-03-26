@@ -1,50 +1,69 @@
 package com.sri.algo.dp.cp;
 
+/**
+ * 
+ *  Given a string s, find the longest palindromic substring in s. 
+ *  You may assume that the maximum length of s is 1000.
+
+	Example:
+	
+	Input: "babad"
+	Output: "bab"
+	Note: "aba" is also a valid answer.
+	 
+	Example:
+	Input: "cbbd"
+	Output: "bb"
+	
+	Time Complexity : O(n*n).
+ *
+ */
 public class LongestPalindromeInAString {
 	
-	public static int lcs(char[] X, char[] Y, int n, int m) {
-
-		int[][] table = new int[n + 1][m + 1];
-
-		int max = Integer.MIN_VALUE;
-		int l =-1;
-
-		for (int i = 0; i <= n; i++) {
-			for (int j = 0; j <= m; j++) {
-				if (i == 0 || j == 0) {
-					table[i][j] = 0;
-				} else if (X[i - 1] == Y[j - 1]) {
-					table[i][j] = table[i - 1][j - 1] + 1;
-
-					if(max < table[i][j])
-					{
-						max = table[i][j];
-						l = i;
-					}
-				} else {
-					table[i][j] = 0;
-				}
-			}
-		}
-
-		if (max == Integer.MIN_VALUE) {
-			max = 0;
-		}
-		
-		StringBuilder s = new StringBuilder();
-		for (int i = l- max;i < l ; i++)
-		{
-			s.append(X[i]);
-		}
-		
-		System.out.println(s.toString());
-
-		return max;
-	}
+	private int startPostion;
+	private int maxLen = Integer.MIN_VALUE;
+	
+	public String longestPalindrome(String s)
+	{
+	     int n = s.length();
+	     if(n < 2)
+	     {
+	    	 return s;
+	     }
+	     
+		 for(int i=0 ;i < n-1;i++)
+		 {
+			 extendPalindrome(s,i,i); // Look for odd length palindrome with i as centre.
+			 extendPalindrome(s,i,i + 1); // Look for even length palindrome with i as centre.
+		 }
+		 
+		 return s.substring(startPostion, startPostion + maxLen);
+		 
+	 }
+	 
+	 private void extendPalindrome(String s,int l,int h)
+	 {
+		 
+		 while(l>=0 && h < s.length() && s.charAt(l) == s.charAt(h))
+		 {
+			 l--;
+			 h++;
+		 }
+		 
+		 if (maxLen < h - l -1)
+		 {
+			 maxLen = h - (l + 1);
+			 startPostion = l + 1;	 
+		 }
+		 
+	 }
+	 
 	
 	public static void main(String[] args) {
 		
-		System.out.println(lcs("aaaabbaa".toCharArray(),"aabbaaaa".toCharArray(),8,8));
+		LongestPalindromeInAString lp = new LongestPalindromeInAString();
+		
+		System.out.println(lp.longestPalindrome("aaaabbaa"));
 		
 	}
 

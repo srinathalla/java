@@ -37,6 +37,55 @@ public class LevelOrderTraversal {
 		return nodes;
 	}
 	
+	
+	private static class TreeNode {
+		     int val;
+		      TreeNode left;
+		     TreeNode right;
+		     TreeNode(int x) { val = x; }
+		 }
+	
+	 public List<List<Integer>> levelOrder(TreeNode root) {
+	        
+	    	List<List<Integer>> nodes = new ArrayList<>();
+	    	
+	    	if (root == null)
+	    	{
+	    		return nodes;
+	    	}
+	    	
+	        Queue<TreeNode> queue  = new LinkedList<>();
+	        queue.add(root);
+	        
+	    
+	        while(!queue.isEmpty())
+	        {
+	            List<Integer> cL = new ArrayList<>();
+	            nodes.add(cL);
+	        	int count = queue.size();
+	            
+	        	for(int i=0 ;i <count;i++)
+	        	{
+		            TreeNode tn = queue.poll();
+		        	cL.add(tn.val);
+		        	
+		        	if(tn.left != null)
+		        	{
+		        		queue.add(tn.left);
+		        	}
+		        	
+		        	if(tn.right != null)
+		        	{
+		        		queue.add(tn.right);
+		        	}
+	        	}
+	        	
+	        }
+	        
+	        return nodes;
+	    }
+	 
+	
 	public static void main(String[] args) {
 
 		BinaryTree binaryTree = new BinaryTree(10);
