@@ -89,6 +89,60 @@ public class MinimumWindowSubsequence {
         
 	}
 	
+	public String minWindowWithTableSizeN(String S, String T) 
+	{
+		int n = T.length();
+		int m = S.length();
+		
+		if(n == 0 || m == 0)
+		{
+			return "";
+		}
+		
+		int[][] dp = new int[n][m];
+		for (int i=0; i<=m;i++)
+		{
+			dp[0][i] = i + 1;
+		}
+		
+		for (int i = 1; i<= n; i++)
+		{
+			for (int j = 1; j <= m; j++)
+			{
+				
+				// If char's match dp(matrix) stores the starting index of matched substring till i. 
+				if (T.charAt(i -1) == S.charAt(j -1))
+				{
+					dp[i][j] = dp[i-1][j-1];
+				}
+				else
+				{
+					// If they dont match store 
+					dp[i][j] = dp[i][j-1];
+				}
+				System.out.print(dp[i][j] + " ");
+			}
+			System.out.println();
+			
+		}
+		
+		int len = m + 1;
+		int start = 0;
+		for (int i =1;i <= m ;i++)
+		{
+			
+			if (dp[n][i] != 0 && i - dp[n][i] + 1 < len)
+			{
+				len = i - dp[n][i] + 1;
+				start = dp[n][i] -1;
+			}
+		}
+		
+		
+		return len == m  + 1 ? "" : S.substring(start, start + len);
+        
+	}
+	
 	public static void main(String[] args) 
 	{
 		
