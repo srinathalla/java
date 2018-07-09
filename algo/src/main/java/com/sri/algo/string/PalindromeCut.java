@@ -1,5 +1,7 @@
 package com.sri.algo.string;
 
+import com.sri.algo.array.PrintArray;
+
 /**
  * Given a string s, partition s such that every substring of the partition is a
  * palindrome.
@@ -25,7 +27,7 @@ public class PalindromeCut {
 	 * @param s
 	 * @return
 	 */
-	public int minCut(String s) {
+	public int minCutWithRecursion(String s) {
 		int n = s.length();
 
 		if (n < 2) {
@@ -67,10 +69,54 @@ public class PalindromeCut {
 		return true;
 	}
 
+	/**
+	 * T.C : O (n * n) .. Auxiallary space : O(n).
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public int minCut(String s) {
+		int len = s.length();
+
+		int[] cuts = new int[len];
+
+		if (len < 2) {
+			return 0;
+		}
+
+		for (int i = 0; i < len; i++) {
+			cuts[i] = i;
+		}
+
+		for (int i = 0; i < len; i++) {
+			extend(s, i, i, cuts);
+			extend(s, i, i + 1, cuts);
+		}
+
+		// System.out.println(Arrays.toString(f));
+		return cuts[len - 1];
+	}
+
+	private void extend(String s, int left, int right, int[] cuts) {
+
+		while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+
+			if (left == 0) {
+				// sub string 0 ..right is a palinndrome, no cuts are required ..
+				cuts[right] = 0;
+			} else {
+				cuts[right] = Integer.min(cuts[right], cuts[left - 1] + 1);
+			}
+			left--;
+			right++;
+		}
+
+	}
+
 	public static void main(String[] args) {
-		
+
 		PalindromeCut pc = new PalindromeCut();
-		
+
 		System.out.println(pc.minCut("aab"));
 
 	}
