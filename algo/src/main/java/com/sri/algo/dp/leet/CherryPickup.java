@@ -1,4 +1,6 @@
-package com.sri.algo.array.cp;
+package com.sri.algo.dp.leet;
+
+import java.util.Arrays;
 
 /**
  * In a N x N grid representing a field of cherries, each cell is one of three
@@ -106,51 +108,78 @@ public class CherryPickup {
 
 	}
 
-	/**
-	 *  Using D.P approach.
-	 * 
-	 *  TODO : Need to revisit this logic again.
-	 * 
-	 * @param grid
-	 * @return
-	 */
 	public int cherryPickup(int[][] grid) {
-		int N = grid.length, M = (N << 1) - 1;
-		int[][] dp = new int[N][N];
-		dp[0][0] = grid[0][0];
+		int ans = 0;
 
-		for (int n = 1; n < M; n++) {
-			for (int i = N - 1; i >= 0; i--) {
-				for (int p = N - 1; p >= 0; p--) {
-					int j = n - i, q = n - p;
+		int[][] bestPath = bestPath(grid);
 
-					if (j < 0 || j >= N || q < 0 || q >= N || grid[i][j] < 0 || grid[p][q] < 0) {
-						dp[i][p] = -1;
-						continue;
-					}
+		if (bestPath == null) {
+			return 0;
+		}
 
-					if (i > 0)
-						dp[i][p] = Math.max(dp[i][p], dp[i - 1][p]);
-					if (p > 0)
-						dp[i][p] = Math.max(dp[i][p], dp[i][p - 1]);
-					if (i > 0 && p > 0)
-						dp[i][p] = Math.max(dp[i][p], dp[i - 1][p - 1]);
+		for (int[] path : bestPath) {
+			ans += grid[path[0]][path[1]];
+			grid[path[0]][path[1]] = 0;
 
-					if (dp[i][p] >= 0) {
-						dp[i][p] += grid[i][j] + (i != p ? grid[p][q] : 0);
-					}
+		}
 
+		for (int[] path : bestPath(grid)) {
+			ans += grid[path[0]][path[1]];
+		}
+
+		return ans;
+	}
+
+	public int[][] bestPath(int[][] grid) {
+		int n = grid.length;
+
+		int[][] ans = new int[(2 * n) - 1][2];
+		int[][] dp = new int[n][n];
+
+		for (int[] row : dp) {
+			Arrays.fill(row, Integer.MIN_VALUE);
+		}
+
+		dp[n - 1][n - 1] = grid[n - 1][n - 1];
+
+		for (int i = n - 1; i >= 0; i--) {
+			for (int j = n - 1; j >= 0; j--) {
+
+				if (grid[i][j] != -1 && (i != n - 1 || j != n - 1)) {
+					dp[i][j] = Integer.max(i + 1 < n ? dp[i + 1][j] : Integer.MIN_VALUE,
+							j + 1 < n ? dp[i][j + 1] : Integer.MIN_VALUE);
+					dp[i][j] += grid[i][j];
 				}
 			}
 		}
 
-		return Math.max(dp[N - 1][N - 1], 0);
+		if (dp[0][0] < 0) {
+			return null;
+		}
+
+		int i = 0, j = 0, t = 0;
+
+		while (i != n - 1 || j != n - 1) {
+			if (j == n - 1 || (i + 1 < n && dp[i + 1][j] >= dp[i][j + 1])) {
+				i++;
+			} else {
+				j++;
+			}
+
+			ans[t][0] = i;
+			ans[t][1] = j;
+			t++;
+		}
+		return ans;
 	}
 
 	public static void main(String[] args) {
 		CherryPickup cp = new CherryPickup();
 
-		int[][] arr = new int[][] { { 0, 1, -1 }, { 1, 0, -1 }, { 1, 1, 1 } };
+		/* int[][] arr = new int[][] { { 0, 1, -1 }, { 1, 0, -1 }, { 1, 1, 1 } }; */
+
+		int[][] arr = new int[][] { { 1, 1, 1, 1, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 1 },
+				{ 1, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 1, 1, 1, 1 } };
 
 		System.out.println(cp.cherryPickup(arr));
 

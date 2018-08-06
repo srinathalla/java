@@ -14,6 +14,13 @@ package com.sri.algo.array;
  */
 public class MaxAverageSubArray {
 
+	/**
+	 * T.C : O(n^2) Space complexity : O(1)O(1). Constant extra space is used.
+	 * 
+	 * @param nums
+	 * @param k
+	 * @return
+	 */
 	public double findMaxAverageNaive(int[] nums, int k) {
 
 		int n = nums.length;
@@ -22,23 +29,17 @@ public class MaxAverageSubArray {
 			return 0;
 		}
 
-		double max = Double.MIN_VALUE;
+		double max = Integer.MIN_VALUE;
 
 		for (int i = 0; i < n; i++) {
-
 			int j = i;
 			double sum = 0;
 
 			while (j < n) {
-
 				sum += nums[j];
 				if (j - i + 1 >= k) {
-
-					if (Double.compare(max, sum / (j - i + 1)) < 0) {
-						max = sum / (j - i + 1);
-					}
+					max = Math.max(max, sum * 1.0 / (j - i + 1));
 				}
-
 				j++;
 			}
 		}
@@ -49,37 +50,60 @@ public class MaxAverageSubArray {
 	boolean check(int[] nums, int k, double x) // Check whether we can find a subarray whose average is bigger than x
 	{
 		int n = nums.length;
-		double[] a = new double[n];
-		for (int i = 0; i < n; i++)
-			a[i] = nums[i] - x; // Transfer to a[i], find whether there is a subarray whose sum is bigger than 0
-		double now = 0, last = 0;
-		for (int i = 0; i < k; i++)
-			now += a[i];
-		if (now >= 0)
-			return true;
-		for (int i = k; i < n; i++) {
-			now += a[i];
-			last += a[i - k];
-			if (last < 0) {
-				now -= last;
-				last = 0;
-			}
-			if (now >= 0)
-				return true;
+
+		double sum = 0, prev = 0;
+		for (int i = 0; i < k; i++) {
+			sum += nums[i] - x;
 		}
+
+		if (sum >= 0) {
+			return true;
+		}
+
+		for (int i = k; i < n; i++) {
+
+			sum += nums[i] - x;
+			prev += nums[i - k] - x;
+
+			if (prev < 0) {
+				sum -= prev;
+				prev = 0;
+			}
+
+			if (sum >= 0) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 
+	/**
+	 * T.C O(nlog(m)) where m is max - min
+	 * 
+	 * at each binary search in (max - min) range we traverse the entire array to
+	 * see if there exists a mid value possible as average..
+	 * 
+	 * 
+	 * @param nums
+	 * @param k
+	 * @return
+	 */
 	public double findMaxAverage(int[] nums, int k) {
 		double l = Integer.MIN_VALUE, r = Integer.MAX_VALUE;
-		while (r - l > 0.000004) // Binary search the answer
-		{
-			double mid = (l + r) / 2;
-			if (check(nums, k, mid))
+
+		while (r - l > 0.000005) {
+			double mid = (l + r) * 0.5;
+
+			if (check(nums, k, mid)) {
 				l = mid;
-			else
-				r = mid;
+
+				// if mid is possible as average check for higher average.
+			} else {
+				r = mid; // if mid is not possible as average check for lower average values.
+			}
 		}
+
 		return r;
 	}
 
@@ -87,15 +111,15 @@ public class MaxAverageSubArray {
 
 		MaxAverageSubArray maxAvg = new MaxAverageSubArray();
 
-		/*
-		 * System.out.println(maxAvg.findMaxAverage(new int[] {1,12,-5,-6,50,3}, 4));
-		 * 
+		System.out.println(maxAvg.findMaxAverage(new int[] { 1, 12, -5, -6, 50, 3 }, 4));
+
+		/**
 		 * System.out.println(maxAvg.findMaxAverage(new int[] {1,12,-5,-6,50,3}, 5));
 		 * 
 		 * System.out.println(maxAvg.findMaxAverage(new int[] {1,12,-5,-6,50,3}, 6));
 		 */
 
-		System.out.println(maxAvg.findMaxAverage(new int[] { -1 }, 1));
+		// System.out.println(maxAvg.findMaxAverageNaive(new int[] { -1 }, 1));
 
 	}
 

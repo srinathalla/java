@@ -10,6 +10,16 @@ public class PrintArray {
 
 	}
 	
+	public static void print(long[] arr) {
+
+		for (long no : arr) {
+			System.out.print(no + " ");
+		}
+		
+		System.out.println();
+
+	}
+	
 	public static void print2dArray(int[][] arr) 
 	{
 		for (int i = 0; i < arr.length; i++) 
