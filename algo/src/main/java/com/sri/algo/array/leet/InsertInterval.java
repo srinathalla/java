@@ -92,6 +92,37 @@ public class InsertInterval {
 			result.add(intervals.get(i));
 		}
 	}
+	
+	public List<Interval> insertInterval(List<Interval> intervals, Interval newInterval) {
+
+		int n = intervals.size();
+		List<Interval>  result = new ArrayList<>();
+		
+		int i=0;
+		
+		// add all the non swapped intervals to the result.
+		while(i < n && intervals.get(i).end < newInterval.start)
+		{
+			result.add(intervals.get(i++));
+		}
+		
+		// merge all the swapped intervals.
+		while (i < n && intervals.get(i).start <= newInterval.end)
+		{
+			newInterval.start = Integer.min(newInterval.start, intervals.get(i).start);
+			newInterval.end = Integer.max(newInterval.end, intervals.get(i).end);
+			i++;
+		}
+		
+		result.add(newInterval);
+		
+		while(i < n)
+		{
+			result.add(intervals.get(i++));
+		}
+		
+		return result;
+	}
 
 	public static void main(String[] args) {
 
@@ -108,6 +139,10 @@ public class InsertInterval {
 		intervals = insertInterval.insert(intervals, new Interval(4, 8));
 
 		System.out.println(intervals);
+		
+		List<Interval> intervals2 = insertInterval.insertInterval(intervals, new Interval(4, 8));
+
+		System.out.println(intervals2);
 
 	}
 

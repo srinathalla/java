@@ -111,6 +111,28 @@ public class FindMinInRotatedSortedArray {
 
 		return nums[h];
 	}
+	
+	 public int findMin2(int[] nums) {
+	        
+		    int n = nums.length;
+	        int l=0, h = n-1;
+	        
+	        while (l < h)
+	        {
+	        	int m = l + (h -l)/2;	
+	        	
+	        	if (nums[m] <= nums[h])
+	        	{
+	        		h= m;
+	        	}
+	        	else
+	        	{
+	        		l = m +1;
+	        	}
+	        }
+	        
+	        return nums[h];
+	    }
 
 	public static void main(String[] args) {
 
@@ -118,11 +140,16 @@ public class FindMinInRotatedSortedArray {
 
 		// System.out.println(findMin.findMin(new int[] { 4, 5, 6, 7, 0, 1, 2 }));
 
-		// System.out.println(findMin.findMin(new int[] { 4, 5, 6, 7, 0, 1, 2 }));
-
-		// System.out.println(findMin.findMin(new int[] { 5, 1, 2, 3, 4 }));
+		/*System.out.println(findMin.findMin(new int[] { 4, 5, 6, 7, 0, 1, 2 }));
 		
-		System.out.println(findMin.findMin(new int[] { 3, 1, 2}));
+		System.out.println(findMin.findMin2(new int[] { 4, 5, 6, 7, 0, 1, 2 }));
+
+		System.out.println(findMin.findMin(new int[] { 5, 1, 2, 3, 4 }));
+		System.out.println(findMin.findMin2(new int[] { 5, 1, 2, 3, 4 }));
+		
+		System.out.println(findMin.findMin(new int[] { 3, 1, 2}));*/
+		
+		System.out.println(findMin.findMin2(new int[] { 3, 1, 3}));
 
 		// System.out.println(findMin.findMin(new int[] { 2, 1 }));
 

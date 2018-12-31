@@ -12,6 +12,10 @@ package com.sri.algo.trie;
  */
 public class Trie {
 
+	public TrieNode getRoot() {
+		return root;
+	}
+
 	private TrieNode root = null;
 
 	public Trie() {

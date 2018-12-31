@@ -56,45 +56,72 @@ public class MaxRectangleArea {
 
 	}
 	
-	public int largestRectangleArea(int[] heights) {
-		
-		int max = Integer.MIN_VALUE;
-		
-		
-		int i =0;
+	/**
+	 * T.C : O (n*n)
+	 * 
+	 * @param heights
+	 * @return
+	 */
+	 public static int largestRectangleAreaNSquare(int[] heights) {
+		 
 		int n = heights.length;
+		int maxArea = Integer.MIN_VALUE;
+
+		for (int i = 0; i < n; i++) {
+			int minHeight = heights[i];
+			for (int j = i; j < n; j++) {
+				minHeight = Integer.min(minHeight, heights[j]);
+
+				maxArea = Integer.max(maxArea, minHeight * (j - i + 1));
+			}
+		}
+
+		return maxArea;
+	        
+	    }
+	
+	 /**
+	  * T.C : O(n)
+	  * @param heights
+	  * @return
+	  */
+	public static int largestRectangleArea(int[] heights) {
 		
 		Stack<Integer> stack = new Stack<>();
+		stack.push(-1);
+		int maxArea = 0;
 		
-		while(i < n)
+		for (int i=0; i< heights.length;i++)
 		{
-			if (stack.isEmpty() || heights[stack.peek()] < heights[i])
-			{
-				stack.push(heights[i]);
-				i++;
+			while (stack.peek() != -1 && heights[stack.peek()] >= heights[i]) {
+				maxArea = Integer.max(maxArea, heights[stack.pop()] * i - stack.peek() -1);
 			}
-			else
-			{
-				int tp = stack.pop();
-				int h =  heights[tp];
-				
-				int area = h * (stack.isEmpty() ? i : i-1-stack.peek());
-				max = Integer.max(max, area);
-			}
+			stack.push(i);
 		}
 		
-		while(!stack.isEmpty())
+		while (stack.peek() != -1)
 		{
-			int tp = stack.pop();
-			int h =  heights[tp];
-			
-			int area = h * (stack.isEmpty() ? i : i-1-stack.peek());
-			max = Integer.max(max, area);
+			maxArea = Integer.max(maxArea, heights[stack.pop()] * (heights.length - stack.peek() -1));
 		}
 		
-		return max;
-        
+		
+		return maxArea;
     }
+	
+	public static int calculateArea(int[] heights, int start, int end) {
+		if (start > end)
+			return 0;
+		int minindex = start;
+		for (int i = start; i <= end; i++)
+			if (heights[minindex] > heights[i])
+				minindex = i;
+		return Math.max(heights[minindex] * (end - start + 1),
+				Math.max(calculateArea(heights, start, minindex - 1), calculateArea(heights, minindex + 1, end)));
+	}
+
+	public static int largestRectangleAreaNlogn(int[] heights) {
+		return calculateArea(heights, 0, heights.length - 1);
+	}
 	
 
 	// Driver program to test above function
@@ -116,6 +143,8 @@ public class MaxRectangleArea {
 		
 		int hist31[] = {2,3,3,3};
 		System.out.println("Maximum area is " + getMaxArea(hist31, hist31.length));
+		
+		System.out.println("Maximum area is " + largestRectangleAreaNlogn(hist31));
 	}
 
 	// This code is Contributed by Sumit Ghosh

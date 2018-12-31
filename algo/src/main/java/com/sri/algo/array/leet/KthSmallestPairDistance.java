@@ -18,6 +18,21 @@ import java.util.Queue;
  */
 public class KthSmallestPairDistance {
 
+	/**
+	 * will use a sliding window approach to count the number of pairs with distance <= guess.
+
+       For every possible right, we maintain the loop invariant: left is the smallest value such
+       that nums[right] - nums[left] <= guess. Then, the number of pairs with right as it's 
+       right-most endpoint is right - left, and we add all of these up.
+       
+       
+       O(NlogW + NlogN), where N is the length of nums, and W is equal to 
+       nums[nums.length - 1] - nums[0], The logW factor comes from our binary search.
+       
+	 * @param nums
+	 * @param k
+	 * @return
+	 */
 	public int smallestDistancePair(int[] nums, int k) {
 
 		int n = nums.length;
@@ -38,6 +53,7 @@ public class KthSmallestPairDistance {
 				count += (j-i-1);
 			}
 
+			System.out.println("l:" + l + " h:" + h + " count: " + count);
 			if (count >= k) {
 				h = m;
 			} else {
@@ -47,6 +63,7 @@ public class KthSmallestPairDistance {
 
 		return l;
 	}
+
 
 	public static void main(String[] args) {
 
@@ -58,7 +75,8 @@ public class KthSmallestPairDistance {
 		// System.out.println(kthSmallestPair.smallestDistancePair(new int[] { 1, 6, 1 }, 3));
 
 		System.out.println(kthSmallestPair.smallestDistancePair(new int[] { 62, 100, 4 }, 2));
-
+		
+		
 	}
 
 }

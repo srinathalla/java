@@ -69,17 +69,60 @@ public class MissingRanges {
 
 		return res;
 	}
+	
+	private String getRange(int lo, int hi)
+	{
+		return lo == hi ? String.valueOf(lo) : lo + "->" + hi; 
+	}
+	
+	public List<String> findMissingRangesWithoutBuilder(int[] nums, int lower, int upper) {
+
+		int n = nums.length;
+		List<String> res = new ArrayList<>();
+
+		if (n == 0) {
+			res.add(getRange(lower, upper));
+			return res;
+		}
+
+		long miss = lower;
+		
+		for (int no : nums)
+		{
+			if (miss < no)
+			{
+				res.add(getRange((int)miss, no - 1));
+			}
+			
+			miss = (long)no + 1;
+		}
+		
+		if(miss <= upper)
+		{
+			res.add(getRange((int)miss, upper));
+		}
+
+		return res;
+	}
 
 	public static void main(String[] args) {
 
 		MissingRanges missRanges = new MissingRanges();
 
 		 System.out.println(missRanges.findMissingRanges(new int[] { 0, 1, 3, 50, 75 }, 0, 99));
-		
+		 System.out.println(missRanges.findMissingRangesWithoutBuilder
+					(new int[] { 0, 1, 3, 50, 75 }, 0, 99));
+		 
 		System.out.println(missRanges.findMissingRanges(new int[] { -1 }, -1, 0));
+		
+		System.out.println(missRanges.findMissingRangesWithoutBuilder
+				(new int[] { -1 }, -1, 0));
 		
 		System.out.println(missRanges.findMissingRanges(new int[] { 1,1,1 }, 1, 1));
 		System.out.println(missRanges.findMissingRanges(new int[] { 2147483647}, 0, 2147483647));
+		
+		System.out.println(missRanges.findMissingRangesWithoutBuilder
+			(new int[] { 2147483647}, 0, 2147483647));
 
 				
 

@@ -87,7 +87,7 @@ public class JumpGame2 {
 	 * @param A
 	 * @return
 	 */
-	public int jump(int[] A) {
+	public int jump2(int[] A) {
 
 		int jumps = 0;
 		int nextMaxJump = 0;
@@ -104,6 +104,26 @@ public class JumpGame2 {
 
 		return jumps;
 	}
+	
+	  public int jump(int[] nums) {
+
+		int currEnd = 0;
+		int currFarthest = 0;
+		int jumps = 0;
+
+		for (int i = 0; i < nums.length - 1; i++) {
+			currFarthest = Integer.max(currFarthest, i + nums[i]);
+
+			if (i == currEnd) {
+				jumps++;
+				currEnd = currFarthest;
+
+			}
+		}
+
+		return jumps;
+	        
+	    }
 
 	public static void main(String[] args) {
 

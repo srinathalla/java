@@ -55,7 +55,8 @@ public class TrappingRainWater {
    	   int r = n-1;
    	   
    	   while(l < r)
-   	   {
+   	   {   		  
+   		 
    		   // Current building will be able to hold water if its height is less than atleast one building to the right.
    		   // The amount of water held is lmax - height[l];
    		   if (height[l] < height[r])
@@ -68,26 +69,63 @@ public class TrappingRainWater {
    			   rmax = Integer.max(rmax, height[r]);   
  			   sum = sum + rmax - height[r--];
    		   }  
+   		   
+   	
    	   }
    	   
    	   return sum;
 	}
+	
+	public int trapWater(int[] height) {
+	
+			int sum = 0;
+			int n = height.length;
+	
+			if (n == 0) {
+				return 0;
+			}
+			int lmax = height[0], rmax = height[n - 1];
+	
+			int l = 0, r = n - 1;
+	
+			while (l <= r) {
+	
+				if (height[l] < height[r]) {
+					if (height[l] < lmax) {
+						sum += lmax - height[l];
+					} else {
+						lmax = height[l];
+					}
+					l++;
+				} else {
+					if (height[r] < rmax) {
+						sum += rmax - height[r];
+					} else {
+						rmax = height[r];
+					}
+					r--;
+				}
+			}
+	
+			return sum;
+	    }
 
 	public static void main(String[] args) {
 
 		TrappingRainWater tr = new TrappingRainWater();
 
-		System.out.println(maxWater(new int[] { 2, 0, 2 }));
+	/*	System.out.println(maxWater(new int[] { 2, 0, 2 }));
 
 		System.out.println(maxWater(new int[] { 3, 0, 0, 2, 0, 4 }));
 
-		System.out.println(maxWater(new int[] { 6, 9, 9 }));
+		System.out.println(maxWater(new int[] { 6, 9, 9 }));*/
 
 		System.out.println(tr.trap(new int[] { 2, 0, 2 }));
+		System.out.println(tr.trapWater(new int[] { 4, 2, 3 }));
 
-		System.out.println(tr.trap(new int[] { 3, 0, 0, 2, 0, 4 }));
+		/*System.out.println(tr.trap(new int[] { 3, 0, 0, 2, 0, 4 }));
 
-		System.out.println(tr.trap(new int[] { 6, 9, 9 }));
+		System.out.println(tr.trap(new int[] { 6, 9, 9 }));*/
 
 	}
 

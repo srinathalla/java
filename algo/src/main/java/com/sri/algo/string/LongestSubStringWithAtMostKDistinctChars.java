@@ -158,6 +158,8 @@ public class LongestSubStringWithAtMostKDistinctChars {
 		// 2));
 
 		System.out.println(lenOfSubStr.lengthOfLongestSubstringKDistinct("abaccc", 2));
+		
+		System.out.println(lenOfSubStr.lengthOfLongestSubstringKDistinct("ab", 2));
 
 	}
 

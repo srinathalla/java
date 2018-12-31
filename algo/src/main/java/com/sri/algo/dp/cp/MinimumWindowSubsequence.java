@@ -2,9 +2,12 @@ package com.sri.algo.dp.cp;
 
 
 /**
- *   Given strings S and T, find the minimum (contiguous) substring W of S, so that T is a subsequence of W.
+ *   Given strings S and T, find the minimum (contiguous) substring W of S, 
+ *   so that T is a subsequence of W.
 
-	If there is no such window in S that covers all characters in T, return the empty string "". If there are multiple such minimum-length windows, return the one with the left-most starting index.
+	If there is no such window in S that covers all characters in T, 
+	return the empty string "". If there are multiple such minimum-length windows, 
+	return the one with the left-most starting index.
 
 	Example 1:
 	Input: 
@@ -49,7 +52,10 @@ public class MinimumWindowSubsequence {
 		for (int i=0; i<=m;i++)
 		{
 			dp[0][i] = i + 1;
+			System.out.print(dp[0][i] + " ");
 		}
+		
+		System.out.println();
 		
 		for (int i = 1; i<= n; i++)
 		{
@@ -148,9 +154,9 @@ public class MinimumWindowSubsequence {
 		
 		MinimumWindowSubsequence mwss = new MinimumWindowSubsequence();
 		
-		// System.out.println(mwss.minWindow("abcdebdde", "bde"));
+		 System.out.println(mwss.minWindow("abcdebdde", "bde"));
 		
-		System.out.println(mwss.minWindow(
+		/*System.out.println(mwss.minWindow(
 				"ffynmlzesdshlvugsigobutgaetsnjlizvqjdpccdylclqcbghhixpjihximvhapymfkjxyyxfwvsfyctmhwmfjyjidnfryiyajmtakisaxwglwpqaxaicuprrvxybzdxunypzofhpclqiybgniqzsdeqwrdsfjyfkgmejxfqjkmukvgygafwokeoegla" +
 				"nevavyrpduigitmrimtaslzboauwbluvlfqquocxrzrbvvplsivujojscytmeyjolvvyzwizpuhejsdzkfwgqdbwinkxqypaphktonqwwanapouqyjdbptqfowhemsnsl", "ntimcimzah"));
 		
@@ -160,7 +166,7 @@ public class MinimumWindowSubsequence {
 		
 		System.out.println(mwss.minWindow(
 				"fgrqsqsnodwmxzkzxwqegkndaa",
-				"fnok"));
+				"fnok"));*/
 		
 	}
 

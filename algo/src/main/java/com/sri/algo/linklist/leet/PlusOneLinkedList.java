@@ -2,15 +2,6 @@ package com.sri.algo.linklist.leet;
 
 public class PlusOneLinkedList {
 
-	private static class ListNode {
-		int val;
-		ListNode next;
-
-		ListNode(int x) {
-			val = x;
-		}
-	}
-
 	public ListNode plusOne(ListNode head) {
 
 		if (head == null) {

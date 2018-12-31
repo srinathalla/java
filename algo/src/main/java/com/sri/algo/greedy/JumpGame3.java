@@ -59,6 +59,28 @@ public class JumpGame3 {
 
 		return false;
 	}
+	
+	/**
+	 * T.C : O (n)
+	 * @param a
+	 * @return
+	 */
+	public boolean canJumpTraverseBack(int[] a) {
+
+		int currPos = a.length -1;
+		
+		for (int i= a.length -2; i>=0; i--)
+		{
+			if (i + a[i] >= currPos)
+			{
+				currPos = i;
+			}
+		}
+
+		return currPos == 0;
+	}
+	
+	
 
 	public static void main(String[] args) {
 

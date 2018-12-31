@@ -8,6 +8,9 @@ public class IntegerToEnglishWords {
 	private final String[] TENS = { "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty",
 			"Ninety" };
 	private final String[] THOUSANDS = { "", "Thousand", "Million", "Billion" };
+	
+	
+
 
 	public String numberToWordsLeetSolution(int num) {
 
@@ -72,6 +75,7 @@ public class IntegerToEnglishWords {
 
 			if (num % 1000 != 0) {
 				StringBuilder sbr = new StringBuilder();
+				System.out.println(sb.toString());
 				lessThanThousand(num % 1000, sbr);
 				sbr.append(THOUSANDS[i]).append(' ').append(sb);
 				sb = sbr;
@@ -112,7 +116,7 @@ public class IntegerToEnglishWords {
 
 		System.out.println(integerToEnglishWords.numberToWords(100));
 
-		System.out.println(integerToEnglishWords.numberToWords(999));
+	/*	System.out.println(integerToEnglishWords.numberToWords(999));
 
 		System.out.println(integerToEnglishWords.numberToWords(9));
 
@@ -127,7 +131,9 @@ public class IntegerToEnglishWords {
 		System.out.println(integerToEnglishWords.numberToWords(0));
 
 		System.out.println(integerToEnglishWords.numberToWords(1000000));
-		System.out.println(integerToEnglishWords.numberToWords(1000000000));
+		System.out.println(integerToEnglishWords.numberToWords(1000000000));*/
+		
+		System.out.println(99 % 1000);
 
 	}
 

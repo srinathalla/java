@@ -2,8 +2,6 @@ package com.sri.algo.array.leet;
 
 import java.util.Arrays;
 
-import com.sri.algo.array.PrintArray;
-
 /**
  * The demons had captured the princess (P) and imprisoned her in the
  * bottom-right corner of a dungeon. The dungeon consists of M x N rooms laid
@@ -118,8 +116,10 @@ public class DungeonGame {
 
 		for (int i = n - 1; i >= 0; i--) {
 			for (int j = m - 1; j >= 0; j--) {
+				
 				int need = Integer.min(dp[i + 1][j], dp[i][j + 1]) - dungeon[i][j];
 				dp[i][j] = need <= 0 ? 1 : need;
+				System.out.println("need :" + need);
 			}
 		}
 

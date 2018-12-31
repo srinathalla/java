@@ -14,6 +14,61 @@ import java.util.Stack;
  * 
  */
 public class MaxRectangleWithAll1sInMatrix {
+	
+	public int maximalRectangle(char[][] matrix) {
+		   
+		
+		 int n = matrix.length;
+        int m = matrix[0].length;
+        
+        int[][] table = new int[n][m];
+        
+        for (int i=0; i< n; i++)
+        {
+            for (int j=0; j< m; j++)
+            {
+               table[i][j] = matrix[i][j] == '1' ? 1 : 0;
+            }
+        }
+        
+		int max_area = largestRectangleArea(table[0]);
+		
+		for (int i=1; i< n; i++)
+		{
+			for (int j=0; j< m; j++)
+			{
+				table[i][j] += table[i][j] == 1 ? table[i-1][j] :  0;
+			}
+			max_area = Integer.max(max_area, largestRectangleArea(table[i]));
+		}
+		
+		
+		return max_area;
+	}
+	 
+	 
+	 public static int largestRectangleArea(int[] heights) {
+			
+			Stack<Integer> stack = new Stack<>();
+			stack.push(-1);
+			int maxArea = 0;
+			
+			for (int i=0; i< heights.length;i++)
+			{
+				while (stack.peek() != -1 && heights[stack.peek()] >= heights[i]) {
+					maxArea = Integer.max(maxArea, heights[stack.pop()] * (i - stack.peek() -1));
+				}
+				stack.push(i);
+			}
+			
+			while (stack.peek() != -1)
+			{
+				maxArea = Integer.max(maxArea, heights[stack.pop()] * (heights.length - stack.peek() -1));
+			}
+			
+			
+			return maxArea;
+	    }
 
 	public static int maxArea(int a[][], int m, int n) {
 
@@ -48,76 +103,38 @@ public class MaxRectangleWithAll1sInMatrix {
 	 public int maximalRectangle(int[][] table) {
 	   
 		 
-		 int n = table.length;
-		 
-		  if (n == 0)
-		  {
-			  return 0;
-		  }
-		  
-		 int m = table[0].length;
-
-		 int max = maxRectangleArea(table[0]);
-		 
-		 for (int i =1 ; i <n; i++)
-		 { 
-			 for (int j =0 ;j <m;j++)
-			 { 
-				 table[i][j] +=  table[i][j] == 1 ? table[i-1][j] : 0;
-			 }
-			 
-			 max = Integer.max(max, maxRectangleArea(table[i]));
-		 }
-		 
-	    return max;
+		int n = table.length;
+		int max_area = largestRectangleArea(table[0]);
+		
+		for (int i=1; i< n; i++)
+		{
+			for (int j=0; j< table[0].length; j++)
+			{
+				table[i][j] += table[i][j] == 1 ? table[i-1][j] :  0;
+			}
+			max_area = Integer.max(max_area, largestRectangleArea(table[i]));
+		}
+		
+		
+		return max_area;
 	}
 	 
-	 
-	 private int maxRectangleArea(int[] arr)
-	 {
-		 
-		 Stack<Integer> stack = new Stack<>();
-		 
-		 int i = 0;
-		 int max = Integer.MIN_VALUE;
-		 while (i < arr.length)
-		 {
-
-			 if (stack.isEmpty() || arr[stack.peek()] <= arr[i])
-			 {
-				 stack.push(i++);
-			 }
-			 else
-			 {
-				 int top = stack.pop();
-				 
-				 int len = stack.isEmpty() ? i : i-1-stack.peek();
-				 
-				 max = Integer.max(max, arr[top] * len); 
-			 }
-		 }
-		 
-		 while (!stack.isEmpty())
-		 {
-			 int top = stack.pop();
-			 
-			 int len = stack.isEmpty() ? i : i-1-stack.peek();
-			 
-			 max = Integer.max(max, arr[top] * len); 
-		 }
-		 
-		 return max;
-	 }
-
+	
 	public static void main(String[] args) {
-
+		
+		MaxRectangleWithAll1sInMatrix maxRect = new MaxRectangleWithAll1sInMatrix();
+/*
 		System.out
 				.println(maxArea(new int[][] { { 0, 1, 1, 0 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 0, 0 } }, 4, 4));
 	
-MaxRectangleWithAll1sInMatrix maxRect = new MaxRectangleWithAll1sInMatrix();
+
 
 		System.out.println(
 				maxRect.maximalRectangle(new int[][] { { 0, 1, 1, 0 }, { 1, 1, 1, 1 }, { 1, 1, 1, 1 }, { 1, 1, 0, 0 } }));
+	*/
+		System.out.println(
+				maxRect.maximalRectangle(new char[][]
+						{{'1','0','1','0','0'},{'1','0','1','1','1'},{'1','1','1','1','1'},{'1','0','0','1','0'}} ));
 	
 	}
 

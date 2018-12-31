@@ -24,6 +24,12 @@ package com.sri.algo.dp.leet;
  */
 public class BuyAndSellStock {
 
+	/**
+	 * T.C : O (k*n)
+	 * @param k
+	 * @param prices
+	 * @return
+	 */
 	public int maxProfit(int k, int[] prices) {
 		int len = prices.length;
 
@@ -35,12 +41,12 @@ public class BuyAndSellStock {
 		for (int i = 1; i <= k; i++) {
 			int tmpmax = -prices[0];
 			for (int j = 1; j < len; j++) {
-				System.out.println("tmpmax" + tmpmax);
+				
 				dp[i][j] = Integer.max(dp[i][j - 1], prices[j] + tmpmax);
 
 				tmpmax = Integer.max(tmpmax, dp[i - 1][j - 1] - prices[j]);
 
-				System.out.println("dp[" + i + "][" + j + "] " + dp[i][j]);
+				
 				
 			}
 		}
@@ -56,14 +62,42 @@ public class BuyAndSellStock {
 				profit += prices[i] - prices[i - 1];
 		return profit;
 	}
+	
+	public int maxProfitWithDP(int k, int[] prices) {
+		int len = prices.length;
+		
+		if(k >= len/2)
+		{
+			return quickSolve(prices);
+		}
+		
+		int[][] dp = new int[k + 1][len];
+		
+		
+		for (int i=1; i <= k; i++)
+		{
+			int profit = -prices[0];
+			for (int j=1; j< len; j++)
+			{
+				System.out.println("profit : " + profit);
+				dp[i][j] = Integer.max(dp[i][j-1], profit + prices[j]);
+				
+				profit = Integer.max(profit,dp[i-1][j-1] - prices[j]);
+			}
+		}
+		
+		return dp[k][len-1];
+	}
 
 	public static void main(String[] args) {
 
 		BuyAndSellStock buySell = new BuyAndSellStock();
 
 		System.out.println(buySell.maxProfit(2, new int[] { 3, 2, 6, 5, 0, 3 }));
+		System.out.println(buySell.maxProfitWithDP(2, new int[] { 3, 2, 6, 5, 0, 3 }));
 
-		System.out.println(buySell.maxProfit(2, new int[] { 2, 4, 1 }));
+		System.out.println(buySell.maxProfit(2, new int[] { 2, 4, 1}));
+		System.out.println(buySell.maxProfitWithDP(2, new int[] { 2, 4, 1 }));
 
 	}
 

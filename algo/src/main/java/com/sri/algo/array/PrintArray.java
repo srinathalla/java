@@ -7,6 +7,30 @@ public class PrintArray {
 		for (int no : arr) {
 			System.out.print(no + " ");
 		}
+	}
+	
+	public static void print(boolean[] arr) {
+
+		for (boolean no : arr) {
+			System.out.print(no + " ");
+		}
+	}
+	
+	public static void print(char[] arr) {
+
+		for (char ch : arr) {
+			System.out.print(ch);
+		}
+		
+		System.out.println();
+
+	}
+	
+	public static void print(double[] arr) {
+
+		for (double no : arr) {
+			System.out.print(no + " ");
+		}
 
 	}
 	

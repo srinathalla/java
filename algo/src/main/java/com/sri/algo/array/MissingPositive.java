@@ -33,7 +33,7 @@ public class MissingPositive
 				// skip negative numbers, 
 				// skip numbers that are already present in the right slots,
 				// skip positive numbers that are beyond the array size.
-				while(nums[i] > 0 && nums[i] != i + 1 && nums[i] <= nums.length &&  nums[i] != nums[nums[i] -1])
+				while(nums[i] > 0 && nums[i] <= nums.length &&  nums[i] != nums[nums[i] -1])
 				{	
 					int temp = nums[i];
 					nums[i] = nums[nums[i] -1];
