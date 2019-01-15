@@ -70,6 +70,8 @@ public class MAxSizeSubArrayWhoseSumEqK {
 			if (!sumMap.containsKey(sum)) {
 				sumMap.put(sum, i);
 			}
+			
+			System.out.println(sumMap);
 
 		}
 

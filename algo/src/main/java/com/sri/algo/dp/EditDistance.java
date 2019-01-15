@@ -27,9 +27,51 @@ public class EditDistance {
 		return m > n ? m - lcs : n- lcs;
 	}
 	
+	 public int minDistance(String word1, String word2) {
+		 
+		 int n = word1.length();
+		 int m = word2.length();
+		 
+		 if (n * m == 0) // if either of the strings are zero.
+		 {
+			 return n + m;
+		 }
+		 
+		 int[][] dist = new int[n+1][m+1];
+		 
+		 for(int i=0;i <= n; i++)
+		 {
+			 dist[i][0] = i;
+		 }
+		 
+		 for(int j=0;j <= m; j++)
+		 {
+			 dist[0][j] = j;
+		 }
+		 
+		 for (int i=1;i <= n; i++)
+		 {
+			 for (int j=1; j<= m;j++)
+			 {
+				 
+				 if (word1.charAt(i-1) == word2.charAt(j-1))
+				 {
+					 dist[i][j] = 1 + Math.min(Math.min(dist[i-1][j], dist[i][j-1]),dist[i-1][j-1]-1);
+				 }
+				 else
+				 {
+					 dist[i][j] = 1 + Math.min(Math.min(dist[i-1][j], dist[i][j-1]),dist[i-1][j-1]);
+				 }
+			 }
+		 }
+		 
+		 return dist[n][m];
+	        
+	    }
+	
 	public static void main(String[] args) {
 		
-		/*String s1 = "AGGTAB";
+		String s1 = "AGGTAB";
 		String s2 = "GXTXAYB";
 
 		char[] X = s1.toCharArray();
@@ -37,7 +79,11 @@ public class EditDistance {
 		int m = X.length;
 		int n = Y.length;
 
-		System.out.println("Length of LCS is" + " " + lcsWithDP(X, Y, m, n));*/
+		// System.out.println("Length of LCS is" + " " + lcsWithDP(X, Y, m, n));
+		
+		EditDistance editDistance = new EditDistance();
+		System.out.println(
+			editDistance.minDistance("horse", "ros"));
 		
 		try(Scanner in = new Scanner(System.in))
 		{

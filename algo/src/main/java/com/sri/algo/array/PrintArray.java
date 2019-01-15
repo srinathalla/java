@@ -9,6 +9,13 @@ public class PrintArray {
 		}
 	}
 	
+	public static void print(Integer[] arr) {
+
+		for (int no : arr) {
+			System.out.print(no + " ");
+		}
+	}
+	
 	public static void print(boolean[] arr) {
 
 		for (boolean no : arr) {

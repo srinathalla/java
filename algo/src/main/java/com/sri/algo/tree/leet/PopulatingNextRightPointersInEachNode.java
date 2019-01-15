@@ -20,7 +20,8 @@ package com.sri.algo.tree.leet;
 public class PopulatingNextRightPointersInEachNode {
 
 	/**
-	 * Idea here is to use level order traversal and use next pointer to link nodes at each level.
+	 * Idea here is to use level order traversal and use next pointer to link nodes 
+	 * at each level.
 	 * 
 	 * T.C : O(n)
 	 * S.C : O(1)
