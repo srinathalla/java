@@ -105,7 +105,7 @@ public class LongestCommonSubSequence {
 
 	public static void main(String[] args) {
 		
-		/*String s1 = "AGGTAB";
+		String s1 = "AGGTAB";
 		String s2 = "GXTXAYB";
 
 		char[] X = s1.toCharArray();
@@ -113,8 +113,8 @@ public class LongestCommonSubSequence {
 		int m = X.length;
 		int n = Y.length;
 
-		System.out.println("Length of LCS is" + " " + lcsWithDP(X, Y, m, n));*/
-		
+		System.out.println("Length of LCS is" + " " + lcsWithDP(X, Y, m, n));
+		/*
 		try(Scanner in = new Scanner(System.in))
 		{
 	        int testCount = in.nextInt();
@@ -136,6 +136,6 @@ public class LongestCommonSubSequence {
 	        	
 	    		System.out.println(lcsWithDP(s1.toCharArray(),s2.toCharArray(),n1,n2));
 	        }
-		}
+		}*/
 	}
 }

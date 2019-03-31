@@ -1,7 +1,5 @@
 package com.sri.algo.dp;
 
-import java.util.Scanner;
-
 public class LongestIncreasingSubSequence {
 
 	public static int longIncreasingSubSequence(int[] arr) {

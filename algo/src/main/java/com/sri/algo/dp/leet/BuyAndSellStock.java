@@ -44,9 +44,7 @@ public class BuyAndSellStock {
 				
 				dp[i][j] = Integer.max(dp[i][j - 1], prices[j] + tmpmax);
 
-				tmpmax = Integer.max(tmpmax, dp[i - 1][j - 1] - prices[j]);
-
-				
+				tmpmax = Integer.max(tmpmax, dp[i - 1][j - 1] - prices[j]);	
 				
 			}
 		}
@@ -63,40 +61,56 @@ public class BuyAndSellStock {
 		return profit;
 	}
 	
+	/**
+	 * T.C : O(nK)
+	 * S.C : O(nK)
+	 * 
+	 * TODO :: S.C can be reduced to O(n)
+	 * 
+	 * @param k
+	 * @param prices
+	 * @return
+	 */
 	public int maxProfitWithDP(int k, int[] prices) {
-		int len = prices.length;
+
+		int n = prices.length;
+		if (n == 0)
+		{
+			return 0;
+		}
 		
-		if(k >= len/2)
+		if (k >= n/2)
 		{
 			return quickSolve(prices);
 		}
 		
-		int[][] dp = new int[k + 1][len];
+		int[][] dp = new int[k+1][n];
 		
-		
-		for (int i=1; i <= k; i++)
+		for (int i=1; i<= k; i++)
 		{
-			int profit = -prices[0];
-			for (int j=1; j< len; j++)
+			int maxThusFar = Integer.MIN_VALUE;
+			for (int j=1; j < n; j++)
 			{
-				System.out.println("profit : " + profit);
-				dp[i][j] = Integer.max(dp[i][j-1], profit + prices[j]);
 				
-				profit = Integer.max(profit,dp[i-1][j-1] - prices[j]);
+				maxThusFar = Integer.max(maxThusFar, dp[i-1][j-1] - prices[j-1]);
+				dp[i][j] = Integer.max(dp[i][j-1], maxThusFar + prices[j]);
 			}
 		}
 		
-		return dp[k][len-1];
+		return dp[k][n-1];
 	}
+	
+	
+	
 
 	public static void main(String[] args) {
 
 		BuyAndSellStock buySell = new BuyAndSellStock();
 
-		System.out.println(buySell.maxProfit(2, new int[] { 3, 2, 6, 5, 0, 3 }));
-		System.out.println(buySell.maxProfitWithDP(2, new int[] { 3, 2, 6, 5, 0, 3 }));
+		// System.out.println(buySell.maxProfit(2, new int[] { 3, 2, 6, 5, 0, 3 }));
+		// System.out.println(buySell.maxProfitWithDP(2, new int[] { 3, 2, 6, 5, 0, 3 }));
 
-		System.out.println(buySell.maxProfit(2, new int[] { 2, 4, 1}));
+		// System.out.println(buySell.maxProfit(2, new int[] { 2, 4, 1}));
 		System.out.println(buySell.maxProfitWithDP(2, new int[] { 2, 4, 1 }));
 
 	}

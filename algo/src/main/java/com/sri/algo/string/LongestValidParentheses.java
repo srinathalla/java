@@ -72,6 +72,8 @@ public class LongestValidParentheses {
 	 * 
 	 * T. C : O (n) as each element is pushed and popped from stack only once.
 	 * 
+	 * S.C : O(n)
+	 * 
 	 * Can we do without stack ? yes, need to refer leet code solutions.
 	 * 
 	 * Auxillary space : O(n) .
@@ -79,144 +81,106 @@ public class LongestValidParentheses {
 	 * @param s
 	 * @return
 	 */
-	public int longestValidParentheses(String s) {
-		int n = s.length();
-
-		if (n < 2) {
-			return 0;
-		}
-
-		int max_len = 0;
-		int i = 0;
-
-		Stack<Integer> pStack = new Stack<>();
-		pStack.push(i++);
-
-		while (i < n) {
-			
-
-			while (i < n && s.charAt(i) == '(')
-			{
-				pStack.push(i++); // Push elements onto stack till u get a closing bracket.
-			}
-
-			if(i >= n)
-			{
-				break;
-			}
-			System.out.println(pStack);
-			if (!pStack.isEmpty() && s.charAt(pStack.peek()) == '(') 
-			{
-				pStack.pop();	
-				int len = pStack.empty() ? i + 1 : i - pStack.peek();
-				max_len = Integer.max(max_len, len);
-			}
-			else
-			{
-				pStack.push(i);
-			}
-			i++;
-		}
-
-		return max_len;
-	}
 	
-	private int longestValidParanthesis(String s)
+	
+	public int longestValidParanthesis(String s)
 	{
-		int n =s.length();
+		int n = s.length();
 		
-		if (n < 2)
-		{
-			return 0;
-		}
+		Stack<Integer> stack = new Stack<>();
+		stack.push(-1);
 		
 		int max = 0;
-		Stack<Integer> stack = new Stack<>();
-	
-		for (int i=0; i < s.length(); i++)
+		
+		for (int i=0 ; i< n ;i ++ )
 		{
 			char ch = s.charAt(i);
 			
-			if(ch == '(')
+			if (ch == '(')
 			{
 				stack.push(i);
 			}
-			else if(ch == ')' && !stack.isEmpty() && s.charAt(stack.peek()) == '(')
+			else
 			{
 				stack.pop();
-				max = Integer.max(max, i - (stack.isEmpty() ? -1 : stack.peek()));
-			}
-			else
-			{
-				stack.push(i);
+				
+				if (stack.isEmpty())
+				{
+					stack.push(i);
+				}
+				else
+				{
+					max = Integer.max(max, i - stack.peek());
+				}
 			}
 		}
 		
 		return max;
-		
 	}
 	
-	private int longestValidParanthesisWithoutStack(String s)
+	/**
+	 * T.C : O(n)
+	 * Two pass solution.
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public int longestValidParanthesisWithoutStack(String s)
 	{
-		int n =s.length();
-		
-		if (n < 2)
-		{
-			return 0;
-		}
-		
-		int max = 0;
-		
-	     int left = 0, right = 0;
-		for (char ch : s.toCharArray())
-		{
-			if (ch == '(')
-			{
-				left++;
-			}
-			else
-			{
-				right++;	
-			}
-			
-			if (left == right)
-			{
-				max = Integer.max(max, 2 * right);
-			}
-			
-			if (right >= left)
-			{
-				left = right = 0;
-			}
-		}
-		
-		for (int i = s.length() -1; i>=0; i--)
-		{
-			char ch = s.charAt(i);
-			
-			if (ch == '(')
-			{
-				left++;
-			}
-			else
-			{
-				right++;	
-			}
-			
-			if (left == right)
-			{
-				max = Integer.max(max, 2 * right);
-			}
-			
-			if (left >= right)
-			{
-				left = right = 0;
-			}
-		}
-			
-			
-		
-		return max;
+		 if (s.length() < 2)
+         {
+             return 0;
+         }
+         
+	    	int left =0, right = 0, max = 0;
+	    	
+	    	for (char ch : s.toCharArray())
+	    	{
+	    		if (ch == '(')
+	    		{
+	    			left++;
+	    		}
+	    		else
+	    		{
+	    			right++;
+	    		}
+	    		
+	    		if(left == right)
+	    		{
+	    			max = Integer.max(max, 2 * right);
+	    		}
+	    		if (right > left)
+	    		{
+	    			left = right = 0;
+	    		}
+	    	}
+	    	
+	    	left = right = 0;
+	    	for (int i=s.length()-1; i>=0; i--)
+	    	{
+	    		char ch = s.charAt(i);
+	    		
+	    		if (ch == '(')
+	    		{
+	    			left++;
+	    		}
+	    		else
+	    		{
+	    			right++;
+	    		}
+	    		
+	    		if(left == right)
+	    		{
+	    			max = Integer.max(max, 2 * right);
+	    		}
+	    		
+	    		if (left > right)
+	    		{
+	    			left = right = 0;
+	    		}
+	    	}
+
+	    	return max;
 		
 	}
 

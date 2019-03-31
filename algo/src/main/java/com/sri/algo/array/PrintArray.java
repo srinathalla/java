@@ -4,9 +4,12 @@ public class PrintArray {
 
 	public static void print(int[] arr) {
 
+		
 		for (int no : arr) {
 			System.out.print(no + " ");
 		}
+		
+		System.out.println();
 	}
 	
 	public static void print(Integer[] arr) {
@@ -14,6 +17,8 @@ public class PrintArray {
 		for (int no : arr) {
 			System.out.print(no + " ");
 		}
+		
+		System.out.println();
 	}
 	
 	public static void print(boolean[] arr) {
@@ -38,6 +43,8 @@ public class PrintArray {
 		for (double no : arr) {
 			System.out.print(no + " ");
 		}
+		
+		System.out.println();
 
 	}
 	

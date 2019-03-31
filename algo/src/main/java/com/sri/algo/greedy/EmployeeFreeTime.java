@@ -24,7 +24,7 @@ import java.util.PriorityQueue;
  * @author salla
  *
  */
-public class EmplyeeFreeTime {
+public class EmployeeFreeTime {
 
 	public static class Interval {
 		int start;
@@ -77,7 +77,7 @@ public class EmplyeeFreeTime {
 	 * @param schedule
 	 * @return
 	 */
-	public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
+	public List<Interval> employeeFreeTime1(List<List<Interval>> schedule) {
 
 		List<Interval> result = new ArrayList<>();
 
@@ -152,10 +152,47 @@ public class EmplyeeFreeTime {
 
 		return result;
 	}
+	
+	/**
+	 * O(nlogn)
+	 * where n is total no of intervals.
+	 * 
+	 * @param schedule
+	 * @return
+	 */
+	 public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
+		 
+		 List<Interval> timeLine = new ArrayList<>();
+		 schedule.forEach(a -> timeLine.addAll(a));
+		 
+		 // Sort by start time.
+		 Collections.sort(timeLine, (a, b) -> a.start - b .start);
+		 
+		 List<Interval> result = new ArrayList<>();
+		 
+		 Interval prev = timeLine.get(0);
+		 
+		 for (Interval curr : timeLine)
+		 {
+			 if (prev.end < curr.start)
+			 {
+				 result.add(new Interval(prev.end, curr.start));
+				 prev =  curr;
+			 }
+			 else
+			 {
+				 prev = prev.end < curr.end ? curr : prev;
+			 }	 
+		 }
+		 
+		 
+		 return result;
+	        
+	    }
 
 	public static void main(String[] args) {
 
-		EmplyeeFreeTime eft = new EmplyeeFreeTime();
+		EmployeeFreeTime eft = new EmployeeFreeTime();
 
 		List<List<Interval>> employeesSchedule = new ArrayList<>();
 
