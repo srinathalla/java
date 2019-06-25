@@ -2,6 +2,7 @@ package com.sri.algo.heap.leet.easy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -63,12 +64,49 @@ public class TopKFrequentWords {
 		return result;
 	}
 	
+	public List<String> topKFrequentInnlogk(String[] words, int k) 
+	{
+		Map<String, Integer> map = new HashMap<>();
+		for (String word : words)
+		{
+			map.put(word, map.getOrDefault(word, 0) + 1);
+		}
+		
+		PriorityQueue<String> pq = new PriorityQueue<>((a,b) -> 
+				map.get(a) != map.get(b) ? 
+				(map.get(a) - map.get(b)) : 
+				 b.compareTo(a));
+		
+		for (String word : map.keySet())
+		{	
+			
+			pq.add(word);	
+			
+			if (pq.size() > k)
+			{
+				pq.poll();
+			}
+		}
+		
+		LinkedList<String> result = new LinkedList<>();
+		while(!pq.isEmpty())
+		{
+			result.addFirst(pq.poll());
+		}
+		
+		return result;
+	}
+	
 	public static void main(String[] args) {
 		
 		TopKFrequentWords topKFrequentWords = new TopKFrequentWords();
 		
 		System.out.println(
 				topKFrequentWords.topKFrequent(new String[] {"i", "love", "leetcode", "i", "love", "coding"}, 2));
+		
+		
+		System.out.println(
+				topKFrequentWords.topKFrequentInnlogk(new String[] {"i", "love", "leetcode", "i", "love", "coding"}, 2));
 		
 	}
 
