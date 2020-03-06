@@ -75,20 +75,41 @@ public class EggDropping {
                	
     	return table[n][k];
     }
+    
+    public int superEggDrop(int K, int N) {
+        int[][] dp = new int[N + 1][K + 1];
+        int m = 0;
+        while (dp[m][K] < N) {
+            ++m;
+            for (int k = 1; k <= K; ++k)
+                dp[m][k] = dp[m - 1][k - 1] + dp[m - 1][k] + 1;
+        }
+        return m;
+    }
+    
+    public int superEggDropOptimized(int K, int N) {
+        int dp[] = new int[K + 1], m = 0;
+        for (m = 0; dp[K] < N; ++m)
+            for (int k = K; k > 0; --k)
+                dp[k] += dp[k - 1] + 1;
+        return m;
+    }
 	
 	public static void main(String[] args) {
 		
-		long start = System.currentTimeMillis();
+	
 		//System.out.println(dropEgg(2 , 30));	
-		long end = System.currentTimeMillis();
+
 		
 		//System.out.println("Time Taken : " + (end - start)/1000);
 		
-		start = System.currentTimeMillis();
-		System.out.println(dropEggWithDP(2 , 3));	
-		end = System.currentTimeMillis();
+		EggDropping eggDrop = new EggDropping();
+		System.out.println(
+			eggDrop.superEggDrop(1, 2));
+		// System.out.println(dropEggWithDP(1 , 2));	
+	
 		 
-		 System.out.println("Time Taken : " + (end - start)/1000);
+	
 	}
 
 }

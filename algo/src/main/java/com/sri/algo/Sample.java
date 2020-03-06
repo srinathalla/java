@@ -104,8 +104,7 @@ public class Sample {
 		
 		return zC == oC;
 		
-	}
-	
+	}	
 	
 	
 	// driver program

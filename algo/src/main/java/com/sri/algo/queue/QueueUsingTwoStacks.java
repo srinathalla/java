@@ -1,6 +1,8 @@
-package com.sri.algo;
+package com.sri.algo.queue;
 
 import java.util.Scanner;
+
+import com.sri.algo.MyStack;
 
 public class QueueUsingTwoStacks<T> {
 

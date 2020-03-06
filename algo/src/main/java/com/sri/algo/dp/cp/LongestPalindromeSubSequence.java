@@ -1,7 +1,5 @@
 package com.sri.algo.dp.cp;
 
-import java.util.Scanner;
-
 /**
  * Given a String, find the longest palindromic subsequence
  * 
@@ -10,6 +8,66 @@ import java.util.Scanner;
  *
  */
 public class LongestPalindromeSubSequence {
+
+	/**
+	 * T.C : O(n*n) where n is length of string
+	 * S.C : O(n*n)
+	 * @param s
+	 * @return
+	 */
+	public int longestPalindromeSubseq(String s) {
+
+		int[][] dp = new int[s.length()][s.length()];
+		
+		for(int i=s.length()-1; i>=0;i--)
+		{
+			dp[i][i] = 1;
+			for(int j=i + 1; j < s.length();j++)
+			{
+				
+				if(s.charAt(i) == s.charAt(j))
+				{
+					dp[i][j] = dp[i+1][j-1] + 2;
+				}
+				else
+				{
+					dp[i][j] = Math.max(dp[i][j-1], dp[i+1][j]);
+				}
+			}
+		}
+		
+		return dp[0][s.length()-1];
+
+	}
+
+	public int longestPalindromeSubseqTopDown(String s) {
+
+		return helper(s, 0, s.length() - 1, new Integer[s.length()][s.length()]);
+
+	}
+
+	private int helper(String s, int i, int j, Integer[][] memo) {
+
+		if (memo[i][j] != null) {
+			return memo[i][j];
+		}
+
+		if (i > j) {
+			return 0;
+		}
+
+		if (i == j) {
+			return 1;
+		}
+
+		if (s.charAt(i) == s.charAt(j)) {
+			memo[i][j] = helper(s, i + 1, j - 1, memo) + 2;
+		} else {
+			memo[i][j] = Math.max(helper(s, i, j - 1, memo), helper(s, i + 1, j, memo));
+		}
+
+		return memo[i][j];
+	}
 
 	/* Returns length of LCS for X[0..m-1], Y[0..n-1] */
 	/**
@@ -50,27 +108,9 @@ public class LongestPalindromeSubSequence {
 
 	public static void main(String[] args) {
 
-		try (Scanner in = new Scanner(System.in)) {
-			int testCount = in.nextInt();
+		LongestPalindromeSubSequence lps = new LongestPalindromeSubSequence();
+		System.out.println(lps.longestPalindromeSubseq("bbbab"));
 
-			for (int i = 0; i < testCount; i++) {
-				String s1 = in.nextLine();
-				while (s1.isEmpty()) {
-					s1 = in.nextLine();
-				}
-				s1.trim();
-				int n1 = s1.length();
-				char[] Y = new char[n1];
-
-				int j = 0;
-				for (int l = n1 - 1; l >= 0; l--) {
-					Y[j] = s1.charAt(l);
-					j++;
-				}
-
-				System.out.println(lcsWithDP(s1.toCharArray(), Y, n1, n1));
-			}
-		}
 	}
 
 }

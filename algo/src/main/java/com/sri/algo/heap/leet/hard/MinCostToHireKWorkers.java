@@ -1,7 +1,6 @@
 package com.sri.algo.heap.leet.hard;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.PriorityQueue;
 
 /**

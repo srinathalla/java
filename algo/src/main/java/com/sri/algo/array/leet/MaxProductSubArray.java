@@ -51,8 +51,12 @@ public class MaxProductSubArray {
 			
 			max_curr = Integer.max(nums[i], max_curr * nums[i]);
 			min_curr = Integer.min(nums[i], min_curr * nums[i]);
+			
+
 
 			max_global = Integer.max(max_global, max_curr);
+			
+			System.out.println("max_curr : " + max_curr + " min_curr : " + min_curr  + " max_global :" + max_global);
 		}
 
 		return max_global;
@@ -62,7 +66,7 @@ public class MaxProductSubArray {
 
 		MaxProductSubArray maxProd = new MaxProductSubArray();
 
-		System.out.println(maxProd.maxProduct(new int[] { -2, 3, -2, 4 }));
+		// System.out.println(maxProd.maxProduct(new int[] { -2, 3, -2, 4 }));
 
 		System.out.println(maxProd.maxProduct(new int[] { -2, 0, -1 }));
 		
