@@ -1,50 +1,42 @@
 package com.sri.algo;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Comparator;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 public class Solution {
 
-	public int sumFourDivisors(int[] nums) {
-
-		int sum = 0;
-
-		for (int no : nums) {
-			Set<Integer> l = new HashSet<>();
-			l.add(1);
-			l.add(no);
-
-			for (int j = 2; j <= Math.sqrt(no); j++) {
-
-				if (no % j == 0) {
-					l.add(j);
-					l.add(no / j);
-				}
-
-				if (l.size() > 4) {
-					break;
-				}
-
-			}
-
-			if (l.size() == 4) {
-				for (int n : l) {
-					sum += n;
-				}
-			}
-		}
-
-		return sum;
-
-	}
+	
+	  public int findKthLargest(int[] nums, int k) {
+	        
+	        
+	        var pq = new PriorityQueue<Integer>();
+	        
+	        for(var a : nums)
+	        {
+	        	pq.add(a);
+	        	
+	        	if(pq.size() > k)
+	        	{
+	        		pq.poll();
+	        	}
+	        }
+	        
+	        return pq.poll();
+	        
+	    }
+	  
 
 	public static void main(String[] args) {
 
 		Solution s = new Solution();
-
-		System.out.println(s.sumFourDivisors(new int[] {21,4,7}));
+		System.out.println(
+			s.maxResult(new int[]{1,-5,-20,4,-1,3,-6,-3}, 2));
+		
+	
+		//System.out.println(
+		// 	s.reformatNumber("123 4-567"));
 
 	}
 

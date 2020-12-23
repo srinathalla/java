@@ -103,10 +103,10 @@ public class GroupShiftedStrings {
 
 		GroupShiftedStrings gshift = new GroupShiftedStrings();
 
-		// System.out.println(gshift.groupStrings(new String[] { "abc", "bcd", "acef",
-		// "xyz", "az", "ba", "a", "z" }));
+		System.out.println(gshift.groupStrings(new String[] { "abc", "bcd", "acef",
+		 "xyz", "az", "ba", "a", "z" }));
 
-		System.out.println(gshift.groupStringsConvertingToString(new String[] { "abc", "am" }));
+		// System.out.println(gshift.groupStringsConvertingToString(new String[] { "abc", "am" }));
 
 	}
 
