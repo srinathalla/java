@@ -1,0 +1,19 @@
+<html>
+<body>
+<script>
+    const eventSource = new EventSource("http://localhost:8080/sse/subscribe");
+
+    eventSource.onopen = function() {
+        console.log("Connected to server");
+    };
+
+     eventSource.addEventListener("update", function(event) {
+        console.log("Received:", event.data);
+    });
+
+    eventSource.onerror = function() {
+        console.log("Connection lost. Reconnecting...");
+    };
+</script>
+</body>
+</html>
